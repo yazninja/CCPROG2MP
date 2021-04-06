@@ -70,7 +70,7 @@ main()
 	printf("%s\n", Data.name);  /* TO DO: print country. */
 	printf("%ld\n", Data.population);  /* TO DO: print population. */ 
 	printf("%.2f\n", Data.lifeExpectancy);  /* TO DO: print life_expectancy */
-	printf("%s %d %d\n", Data.daily[Data.count].date, Data.daily[Data.count].cases, Data.daily[Data.count].deaths); /* TO DO: print last row of COVID-19 data (date, new_cases and new_deaths). */
+	printf("%s %d %d\n", Data.daily[Data.count-1].date, Data.daily[Data.count-1].cases, Data.daily[Data.count-1].deaths); /* TO DO: print last row of COVID-19 data (date, new_cases and new_deaths). */
 	printf("\n\n");
 	
 		

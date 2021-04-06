@@ -37,12 +37,8 @@ Input_COVID_Data( char * param_country, country * ptrData )  /* TO DO: fill up t
 	int i = 0;
 	/* Document your solution with inline comments. */
 	strcpy(ptrData->name, param_country);
-	while (scanf("%s, %d, %d, %ld, %f", ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
-	{
+	while (scanf("%s %d %d %ld %f", ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
 		i++;
-		printf("TEST: %ld %f", ptrData->population,ptrData->lifeExpectancy);
-	}
-		
 	ptrData->count = i;
 }
 
