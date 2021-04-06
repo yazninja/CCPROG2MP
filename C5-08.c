@@ -21,7 +21,7 @@
 		TO DO: replace NUMBER in the #include below with your own group number.  Do NOT edit the other lines between
 		#ifndef to #endif
 	*/
-    #include "C2-NUMBER.h"
+    #include "C2-08.h"
 
 	#define C2DEFINED (1) 
 #endif
@@ -93,9 +93,12 @@
 // }
 void formatDate(StrDate date, long int * month, long int * day, long int * year)
 {
-  year = 
+  year = atol(date);
+  month = atol(date);
+  day = atol(date);
 }
-void printReport(char * name)
+void monthlyTotal()
+void printReport(char * name,)
 {
   printf("%s\n%ld\n%f", name,population,lifeExpectancy);
 }
