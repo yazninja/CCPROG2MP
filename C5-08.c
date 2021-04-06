@@ -51,16 +51,63 @@
 /*
 	You may define helper functions that you need in this file.	
 */
+// month(){
+//   string dMonth;
 
-
+//   if(date == 01){
+//     strcpy(dMonth,"Jan")
+//   }
+//   else if(date == 02){
+//     strcpy(dMonth,"Feb")
+//   }
+//   else if(date == 03){
+//     strcpy(dMonth,"Mar")
+//   }
+//   else if(date == 04){
+//     strcpy(dMonth,"Apr")
+//   }
+//   else if(date == 05){
+//     strcpy(dMonth,"May")
+//   }
+//   else if(date == 06){
+//     strcpy(dMonth,"Jun")
+//   }
+//   else if(date == 07){
+//     strcpy(dMonth,"Jul")
+//   }
+//   else if(date == 08){
+//     strcpy(dMonth,"Aug")
+//   }
+//   else if(date == 09){
+//     strcpy(dMonth,"Sep")
+//   }
+//   else if(date == 10){
+//     strcpy(dMonth,"Oct")
+//   }
+//   else if(date == 11){
+//     strcpy(dMonth,"Nov")
+//   }
+//   else if(date ==  12){
+//     strcpy(dMonth,"Dec")
+//   }
+// }
+void formatDate(StrDate date, long int * month, long int * day, long int * year)
+{
+  year = 
+}
+void printReport(char * name)
+{
+  printf("%s\n%ld\n%f", name,population,lifeExpectancy);
+}
 /*
 	Describe briefly what this function will do.
 */
 void
-COVID_Monthly_Statistics( __________ param_country, ____________ Data) /* TO DO: fill up the parameter data type. */
+COVID_Monthly_Statistics(char * param_country, country Data) /* TO DO: fill up the parameter data type. */
 {
 	/* Declare your own local variables. */
 	
+  long month, day, year;
 	/* Document your solution with inline comments. */
 	
 	/* You may call the helper function(s) you defined above. */

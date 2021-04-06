@@ -1,0 +1,2 @@
+language = "c"
+run = "gcc -Wall MP2-08.c && ./a.out < PHILIPPINES.txt"

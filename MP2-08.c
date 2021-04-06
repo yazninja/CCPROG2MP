@@ -31,7 +31,7 @@
 */  
 #include "C3-08.c"
 #include "C4-08.c"
-//#include "C5-08.c"
+#include "C5-08.c"
 
 
 /*
@@ -84,7 +84,7 @@ main()
 	
 	// test C5 solution
 	printf("**TEST-C5**\n");
-	//COVID_Monthly_Statistics(param_country, Data);
+	COVID_Monthly_Statistics(param_country, Data);
 		
 	return 0;
 }
