@@ -33,7 +33,7 @@ typedef char string[33];
 	Step 2. Declare a structure data type (made up of 3 members) that can be used to represent ONE row of daily data,
 	     	i.e., date, new_cases, new_deaths.
 */
-typedef struct dataType
+struct dataType
 {
 	StrDate date;
 	int cases;
@@ -50,7 +50,7 @@ typedef struct dataType daily;
 	Step 4. Declare a 2nd structure data type (made up of 5 members) that can be used 
 			to represent data/statistics for one country.  
 */
-typedef struct countryType
+struct countryType
 {
 	string name;
 	long int population;
