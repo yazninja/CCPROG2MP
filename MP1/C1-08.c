@@ -31,7 +31,7 @@
     You may declare any typedef that you need below this comment.
 */
 #define MAX 1000
-typedef char string[256];
+typedef char string[11];
 
 /*
 
