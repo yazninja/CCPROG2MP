@@ -6,7 +6,7 @@
     SECTION2             : S15   
     
 	
-	DATE SUBMITTED      :  March 28,2021
+	DATE SUBMITTED      :  April 8,2021
 	
 	CCPROG2 MP Solution for: Challenge #1  
         
@@ -32,9 +32,6 @@
 */
 typedef char string[256];
 
-
-
-
 /*
 
 	You have to segregate your program's logic into functions.  Non-compliance 
@@ -57,13 +54,14 @@ void ReadData(string date[], int cases[][2], int * population, float * lifeExpec
 void PrintData (string date[], int cases[][2], int population, float lifeExpectancy, int n)
 {
 	int i,totalnew = 0, totaldeaths = 0;
-	printf("Popultaton: %d\nLife Expeactancy: %.2f\n\n",population,lifeExpectancy);
-	printf("Date\t\tNew Cases\tTotal Cases\tNew Deaths\tTotalDeaths\n");
+	printf("%d\n%.2f\n\n",population,lifeExpectancy);
 	for (i=0; i < n; i++)
 	{
 		totalnew += cases[i][0];
 		totaldeaths += cases[i][1];
-		printf("%s\t%d\t\t%d\t\t%d\t\t%d\n",date[i], cases[i][0], totalnew, cases[i][1], totaldeaths);
+		date[i][4] = '/';  // change "-" to "/"
+		date[i][7] = '/';
+		printf("%s\t\t%d\t\t%d\t\t%d\t\t%d\n",date[i], cases[i][0], totalnew, cases[i][1], totaldeaths);
 	}
 }
 int
@@ -80,6 +78,3 @@ main()
     PrintData (date,cases,population, lifeExpectancy,n);   
 	return 0;
 }
-
-
-
