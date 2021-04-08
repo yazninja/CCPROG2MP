@@ -1,2 +1,0 @@
-language = "c"
-run = "gcc -Wall MP2-08.c -o MP2-08 && ./'MP2-08' < PHILIPPINES.txt"
