@@ -187,7 +187,7 @@ Project Link: [https://github.com/yazninja/CCPROG2MP](https://github.com/yazninj
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=for-the-badge
 [contributors-url]: https://github.com/yazninja/CCPROG2MP/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/yazninja/CCPROG2MP.svg?style=for-the-badge
-[forks-url]: https://github.com/yazninja/CCPROG2MP//network/members
+[forks-url]: https://github.com/yazninja/CCPROG2MP/network/members
 [stars-shield]: https://img.shields.io/github/stars/yazninja/CCPROG2MP.svg?style=for-the-badge
 [stars-url]: https://github.com/yazninja/CCPROG2MP/stargazers
 [issues-shield]: https://img.shields.io/github/issues/yazninja/CCPROG2MP.svg?style=for-the-badge
