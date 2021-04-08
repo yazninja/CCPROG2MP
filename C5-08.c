@@ -51,57 +51,30 @@
 /*
 	You may define helper functions that you need in this file.	
 */
-// month(){
-//   string dMonth;
+void Print_EnglishMonth(long int month)
+{
+	switch (month)
+	{
+	case 1:		printf("Jan");		break;
+	case 2:		printf("Feb");		break;
+	case 3:		printf("Mar");		break;
+	case 4:		printf("Apr");		break;
+	case 5:		printf("May");		break;
+	case 6:		printf("Jun");		break;
+	case 7:		printf("Jul");		break;
+	case 8:		printf("Aug");		break;
+	case 9:		printf("Sep");		break;
+	case 10:	printf("Oct");		break;
+	case 11:	printf("Nov");		break;
+	case 12:	printf("Dec");		break;
+	}
+}
+void Print_MonthSummary(long int m, long int fd, long int ld, long int y, int c, int d)
+{
+	Print_EnglishMonth(m);
+	printf("%3ld to %ld, %ld\t%10d%10d\n",fd,ld,y,c,d);
+}
 
-//   if(date == 01){
-//     strcpy(dMonth,"Jan")
-//   }
-//   else if(date == 02){
-//     strcpy(dMonth,"Feb")
-//   }
-//   else if(date == 03){
-//     strcpy(dMonth,"Mar")
-//   }
-//   else if(date == 04){
-//     strcpy(dMonth,"Apr")
-//   }
-//   else if(date == 05){
-//     strcpy(dMonth,"May")
-//   }
-//   else if(date == 06){
-//     strcpy(dMonth,"Jun")
-//   }
-//   else if(date == 07){
-//     strcpy(dMonth,"Jul")
-//   }
-//   else if(date == 08){
-//     strcpy(dMonth,"Aug")
-//   }
-//   else if(date == 09){
-//     strcpy(dMonth,"Sep")
-//   }
-//   else if(date == 10){
-//     strcpy(dMonth,"Oct")
-//   }
-//   else if(date == 11){
-//     strcpy(dMonth,"Nov")
-//   }
-//   else if(date ==  12){
-//     strcpy(dMonth,"Dec")
-//   }
-// }
-void formatDate(StrDate date, long int * month, long int * day, long int * year)
-{
-  year = atol(date);
-  month = atol(date);
-  day = atol(date);
-}
-void monthlyTotal()
-void printReport(char * name,)
-{
-  printf("%s\n%ld\n%f", name,population,lifeExpectancy);
-}
 /*
 	Describe briefly what this function will do.
 */
@@ -109,11 +82,32 @@ void
 COVID_Monthly_Statistics(char * param_country, country Data) /* TO DO: fill up the parameter data type. */
 {
 	/* Declare your own local variables. */
-	
-  long month, day, year;
+	int i=0;
+	long int month,day,year,tempmonth, firstday;
+	int tCases, tDeaths;
 	/* Document your solution with inline comments. */
 	
 	/* You may call the helper function(s) you defined above. */
+	printf("%s\n%ld\n%.2f\n\n",Data.name,Data.population,Data.lifeExpectancy);
+	while(i < Data.count)
+	{
+		tCases = 0;
+		tDeaths = 0;
+		year = atol(Data.daily[i].date);
+		month = atol(Data.daily[i].date + 5);
+		day = atol(Data.daily[i].date + 8);
+		firstday = day;
+		tempmonth = month;
+		while(month == tempmonth)
+		{
+			tCases += Data.daily[i].cases;
+			tDeaths += Data.daily[i].deaths;
+			day = atol(Data.daily[i].date + 8);
+			i++;
+			month = atol(Data.daily[i].date + 5);
+		}
+		Print_MonthSummary(tempmonth,firstday,day,year,tCases,tDeaths);
+	}
 					
 }
 
