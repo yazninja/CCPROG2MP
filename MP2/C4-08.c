@@ -1,12 +1,12 @@
 /*
-    LASTNAME1, FIRSTNAME1:  
-    SECTION1            :    
+    LASTNAME1, FIRSTNAME1: Grasparil, David Nikolai 
+    SECTION1            :  S15
     
-	LASTNAME2, FIRSTNAME2: 
-    SECTION2             :    
+	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean
+    SECTION2             : S15   
     
 	
-	DATE SUBMITTED      :
+	DATE SUBMITTED      :  April 8,2021
 	
 	CCPROG2 MP Solution for: Challenge #4     
 */
