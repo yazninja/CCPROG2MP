@@ -30,6 +30,7 @@
 /*
     You may declare any typedef that you need below this comment.
 */
+#define MAX 1000
 typedef char string[256];
 
 /*
@@ -69,8 +70,8 @@ main()
 {
     /* Declare your own local variables. */
     int n=0, population;
-    string date[1000];
-    int cases[1000][2];
+    string date[MAX];
+    int cases[MAX][2];
     float lifeExpectancy;
     
     /* Call the functions that you defined. */
