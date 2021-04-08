@@ -39,7 +39,7 @@
   <h3 align="center">CCPROG 2 Machine Project</h3>
 
   <p align="center">
-    A Machine Project for CCPROG2 :P (lmao what do you expect???)
+    A Machine Project for CCPROG2 :P (lmao what do you expect???):laughing:
     <br />
     <a href="https://github.com/yazninja/CCPROG2MP"><strong>Explore the docs »</strong></a>
     <br />
