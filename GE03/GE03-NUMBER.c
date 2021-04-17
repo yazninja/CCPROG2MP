@@ -1,17 +1,11 @@
 /* 
     ENCODE your Name(s) and Section(s) below.
 	    
-    lASTNAME1, FIRSTNAME1: 
-	SECTION1: 
+    lASTNAME1, FIRSTNAME1: Ligot, Yazle Sean S.
+	SECTION1: S11
 	
-	lASTNAME2, FIRSTNAME2: 
-	SECTION1: 	
-	
-	lASTNAME3, FIRSTNAME3: 
-	SECTION3: 
-		
-	lASTNAME4, FIRSTNAME4: 
-	SECTION4: 
+	lASTNAME2, FIRSTNAME2: Grasparil, David Nikoli G. 
+	SECTION1: S11
 	
 	
 	This is the skeleton file that you need to use as base code for GE03 (Group Graded Exercise)
@@ -59,8 +53,22 @@ int
 Search(Str30 key, Str30 List[], int n)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
-	
-	return 0;	// do not forget a return statement; change 0 to an appropriate value 
+	int low = 0, high = n -1, mid;
+	int found = 0;
+
+	while(!found && low <= high)
+	{
+		mid = (low + high) /2;
+		if(strcmp(key, List[mid]) == 0)
+			found = 1;
+		else if(strcmp(key, List[mid]) < 0)
+			high = mid -1;
+		else
+			low = mid + 1;
+	}
+	if (found)
+		return mid;
+	return -1;	// do not forget a return statement; change 0 to an appropriate value 
 }
 
 
