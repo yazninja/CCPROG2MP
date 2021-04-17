@@ -36,7 +36,7 @@
 	
 	Single digit group numbers (1 to 9) must be encoded with a leading zero.   
 */
-#include "GE03-NUMBER.c"
+#include "GE03-23.c"
 
 
 /*
