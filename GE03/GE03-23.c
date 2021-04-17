@@ -103,6 +103,7 @@ Insert(Str30 key, Str30 List[], int *pnElem)
 			i--;
 		}
 		strcpy(List[i],key);
+		(*pnElem)++;
 		return i;
 	}	
 	return -1;	// do not forget a return statement; change 0 to an appropriate value 
@@ -154,6 +155,17 @@ int
 Delete(Str30 key, Str30 List[], int *pnElem)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
+	int j,i = Search(key,List,*pnElem);
+	if (i >= 0)
+	{
+		for (j = i; j < *pnElem -1; j++)
+		{
+			strcpy(List[j],List[j+1]);
+		}
+		strcpy(List[*pnElem],"");
+		(*pnElem)--;
+		return 1;	
+	}
 
 	return 0;	// do not forget a return statement; change 0 to an appropriate value
 }
