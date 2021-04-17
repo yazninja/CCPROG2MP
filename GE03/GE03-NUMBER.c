@@ -93,8 +93,19 @@ int
 Insert(Str30 key, Str30 List[], int *pnElem)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
-	
-	return 0;	// do not forget a return statement; change 0 to an appropriate value 
+	int i;
+	if(Search(key,List,*pnElem) == -1)
+	{
+		i= *pnElem +1;
+		while(strcmp(key,List[i-1])< 0)
+		{
+			strcpy(List[i],List[i-1]);
+			i--;
+		}
+		strcpy(List[i],key);
+		return i;
+	}	
+	return -1;	// do not forget a return statement; change 0 to an appropriate value 
 }
 
 
