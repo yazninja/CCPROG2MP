@@ -126,6 +126,11 @@ void
 FrequencyCount(int FC[], Str30 List[], int n)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
+	int i,j;
+
+	for(i=0; i < n; i++)
+		for(j=0; j < strlen(List[i]); j++)
+			FC[List[i][j] - 'A']++;
 
 }
 
