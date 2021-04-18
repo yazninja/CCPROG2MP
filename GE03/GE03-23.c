@@ -135,13 +135,11 @@ FrequencyCount(int FC[], Str30 List[], int n)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
 	int i,j;
-
-	for(i=0; i < n; i++)
-		for(j=0; j < strlen(List[i]); j++)
+	for(i=0; i < n; i++) // words
+		for(j=0; j < strlen(List[i]); j++) // letter in word
 			FC[List[i][j] - 'A']++;
-
+			//  Letter		65
 }
-
 
 /*
 	TO DO TASK #4: [for 10 points]
@@ -165,16 +163,17 @@ Delete(Str30 key, Str30 List[], int *pnElem)
 	int j,i = Search(key,List,*pnElem);
 	if (i >= 0)
 	{
-		for (j = i; j < *pnElem -1; j++)
+		for (j = i; j < *pnElem -1; j++) 
 		{
-			strcpy(List[j],List[j+1]);
+			strcpy(List[j],List[j+1]); // shift elements to the left
 		}
-		strcpy(List[*pnElem],"");
+		strcpy(List[*pnElem],""); // unintitialize last element
 		(*pnElem)--;
-		return 1;	
+		return 1; //delete successful	
 	}
 
-	return 0;	// do not forget a return statement; change 0 to an appropriate value
+	return 0; // not found in list, delete unsucessful	
+	// do not forget a return statement; change 0 to an appropriate value
 }
 
 
