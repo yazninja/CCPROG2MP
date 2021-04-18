@@ -97,16 +97,19 @@ Insert(Str30 key, Str30 List[], int *pnElem)
 	Str30 temp;
 	if(Search(key,List,*pnElem) == -1)
 	{
-		for(i=0; i < *pnElem -1; i++)
+		if(*pnElem == 0) //if key is first word
 		{
-			for(j = i + 1; j < *pnElem; j++)
-				if(strcmp(key,List[j])> 0)
-					strcpy(List[j], key);
-		
-			strcpy(temp,List[i]);
-    		strcpy(List[i],key);
-    		strcpy(key,temp);	
+			strcpy(List[0],key);
+			(*pnElem)++;
+			return 0;
 		}
+		i = *pnElem;
+		while(strcmp(key,List[i-1]) < 0) // key is smaller than List
+		{
+			strcpy(List[i],List[i-1]);
+			i--;
+		}
+		strcpy(List[i],key);
 		(*pnElem)++;
 		return i;
 	}	
