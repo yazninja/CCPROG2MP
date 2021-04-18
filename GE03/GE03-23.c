@@ -94,28 +94,26 @@ Insert(Str30 key, Str30 List[], int *pnElem)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
 	int i,j;
+	Str30 temp;
 	if(Search(key,List,*pnElem) == -1)
 	{
-		if (*pnElem == 0)
-			strcpy(List[0],key);
-		else
-		for(i=0; i < *pnElem; i++)
+		for(i=0; i < *pnElem -1; i++)
 		{
-			if (strcmp(key,List[i]) < 0 && strcmp(key,List[i+1]) > 0)
-			{
-				i++;
-				for(j = *pnElem + 1; j > i; j--)
-				{
-					strcpy(List[j],List[j-1]);
-				}
-				strcpy(List[i],key);
-			}
+			for(j = i + 1; j < *pnElem; j++)
+				if(strcmp(key,List[j])> 0)
+					strcpy(List[j], key);
+		
+			strcpy(temp,List[i]);
+    		strcpy(List[i],key);
+    		strcpy(key,temp);	
 		}
 		(*pnElem)++;
+		return i;
 	}	
 	return -1;	// do not forget a return statement; change 0 to an appropriate value 
-}
 
+	
+}
 
 /*
    	TO DO TASK #3: [for 10 points]
