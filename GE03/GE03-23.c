@@ -93,7 +93,7 @@ int
 Insert(Str30 key, Str30 List[], int *pnElem)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
-	int i= *pnElem,j;
+	int i= *pnElem;
 	if(Search(key,List,*pnElem) == -1)
 	{
 		if(*pnElem == 0) //if key is first word
