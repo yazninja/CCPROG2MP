@@ -4,7 +4,7 @@
     lASTNAME1, FIRSTNAME1: Ligot, Yazle Sean S.
 	SECTION1: S11
 	
-	lASTNAME2, FIRSTNAME2: Grasparil, David Nikoli G. 
+	lASTNAME2, FIRSTNAME2: Grasparil, David Nikolai G. 
 	SECTION1: S11
 	
 	
@@ -93,8 +93,7 @@ int
 Insert(Str30 key, Str30 List[], int *pnElem)
 {
 	/* Declare your own local variables.  Implement the body of this function. */
-	int i,j;
-	Str30 temp;
+	int i= *pnElem,j;
 	if(Search(key,List,*pnElem) == -1)
 	{
 		if(*pnElem == 0) //if key is first word
@@ -103,7 +102,6 @@ Insert(Str30 key, Str30 List[], int *pnElem)
 			(*pnElem)++;
 			return 0;
 		}
-		i = *pnElem;
 		while(strcmp(key,List[i-1]) < 0) // key is smaller than List
 		{
 			strcpy(List[i],List[i-1]);
@@ -113,7 +111,8 @@ Insert(Str30 key, Str30 List[], int *pnElem)
 		(*pnElem)++;
 		return i;
 	}	
-	return -1;	// do not forget a return statement; change 0 to an appropriate value 
+	return -1; // found the word in list, skip	
+	// do not forget a return statement; change 0 to an appropriate value 
 
 	
 }
