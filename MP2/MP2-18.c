@@ -54,7 +54,7 @@ Test_Search(StrDate date, country Data)  /* TO DO: fill up the parameter data ty
 int
 main()
 {
-	char param_country[50] = "PHILIPPINES";	// TO DO: Test first your solution using PHILIPPINES.TXT as input data.
+	char param_country[50] = "BAHRAIN";	// TO DO: Test first your solution using PHILIPPINES.TXT as input data.
 	                                        //        Once you're sure it works, test your solution using data for other countries.
 	                                        //        Replace this string definition with another country name.
 	                                        
