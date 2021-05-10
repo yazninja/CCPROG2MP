@@ -6,7 +6,7 @@
     SECTION2             : S15   
     
 	
-	DATE SUBMITTED      :  April 8,2021
+	DATE SUBMITTED      :  May 10,2021
 	
 	CCPROG2 MP Solution for: Challenge #3     
 */
@@ -29,6 +29,7 @@
 
 /*
 	Describe briefly what this function will do.
+  Copy the country name to the country structure then fill the  day structure with inforamtion. While all are successful, the program moves to the next day.
 */
 void
 Input_COVID_Data( char * param_country, country * ptrData )  /* TO DO: fill up the parameter data type. */
@@ -36,10 +37,10 @@ Input_COVID_Data( char * param_country, country * ptrData )  /* TO DO: fill up t
 	/* Declare your own local variables. */
 	int i = 0;
 	/* Document your solution with inline comments. */
-	strcpy(ptrData->name, param_country);
-	while (scanf("%s %d %d %ld %f", ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
-		i++;
-	ptrData->count = i;
+	strcpy(ptrData->name, param_country); // copy country name
+	while (scanf("%s %d %d %ld %f ", ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5) // copy data from country file
+		i++; // increase day count
+	ptrData->count = i; // set total days recorded to country count
 }
 
 

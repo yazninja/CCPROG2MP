@@ -6,7 +6,7 @@
     SECTION2             : S15   
     
 	
-	DATE SUBMITTED      :  April 8,2021
+	DATE SUBMITTED      :  May 10,2021
 	
 	CCPROG2 MP Solution for: Challenge #4     
 */
@@ -29,6 +29,8 @@
 
 /*
 	Describe briefly what this function will do.
+  
+  Compares date to all dates and returns 
 */
 int
 COVID_Search( StrDate param_date, country Data) /* TO DO: fill up the parameter data type. */

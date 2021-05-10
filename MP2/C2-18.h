@@ -15,12 +15,12 @@
 	date as a string, ex.  "2021-03-21" (string length of 10).
 */
 typedef char StrDate[11];  
-typedef char string[33];
+
 
 /*
 	You may add your own typedef for another string alias right after this comment.	
 */
-
+typedef char string[33];
 
 
 /*
@@ -33,7 +33,7 @@ typedef char string[33];
 	Step 2. Declare a structure data type (made up of 3 members) that can be used to represent ONE row of daily data,
 	     	i.e., date, new_cases, new_deaths.
 */
-struct dataType
+struct data
 {
 	StrDate date;
 	int cases;
@@ -43,29 +43,28 @@ struct dataType
 /*
 	Step 3. Declare a typedef alias for the structure data type in the previous step.
 */
-typedef struct dataType daily;
+typedef struct data day;
 
 
 /*
 	Step 4. Declare a 2nd structure data type (made up of 5 members) that can be used 
 			to represent data/statistics for one country.  
 */
-struct countryType
+struct status
 {
 	string name;
 	long int population;
 	float lifeExpectancy;
-	daily daily[MAX];
+	day daily[MAX];
 	int count;
 };
-
 
 
 /*
 	Step 5. Declare a typedef alias for the structure data type in the previous step.
 */
 
-typedef struct countryType country;
+typedef struct status country;
 
 /*--- THE END ---*/
 
