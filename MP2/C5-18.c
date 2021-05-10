@@ -49,7 +49,8 @@
 
 
 /*
-	You may define helper functions that you need in this file.	
+	You may define helper functions that you need in this file.
+  Prints the appropriate month for the parameter month integer.	
 */
 void Print_EnglishMonth(long int month)
 {
@@ -69,6 +70,9 @@ void Print_EnglishMonth(long int month)
 	case 12:	printf("Dec");		break;
 	}
 }
+/*
+  Prints the monthly summary given the month, first day, last day, year, monthly cases, and monthly deaths
+*/
 void Print_MonthSummary(long int m, long int fd, long int ld, long int y, int c, int d)
 {
 	Print_EnglishMonth(m);
@@ -76,7 +80,7 @@ void Print_MonthSummary(long int m, long int fd, long int ld, long int y, int c,
 }
 
 /*
-	Describe briefly what this function will do.
+  Computes a summary of monthly statistics.
 */
 void
 COVID_Monthly_Statistics(char * param_country, country Data) /* TO DO: fill up the parameter data type. */
@@ -89,22 +93,22 @@ COVID_Monthly_Statistics(char * param_country, country Data) /* TO DO: fill up t
 	
 	/* You may call the helper function(s) you defined above. */
 	printf("%s\n%ld\n%.2f\n\n",Data.name,Data.population,Data.lifeExpectancy);
-	while(i < Data.count)
+	while(i < Data.count) // while i is less than total recorded dates
 	{
 		tCases = 0;
 		tDeaths = 0;
-		year = atol(Data.daily[i].date);
-		month = atol(Data.daily[i].date + 5);
-		day = atol(Data.daily[i].date + 8);
-		firstday = day;
-		tempmonth = month;
-		while(month == tempmonth)
+		year = atol(Data.daily[i].date); // copy year      
+		month = atol(Data.daily[i].date + 5); // copy month
+		day = atol(Data.daily[i].date + 8); // copy day
+		firstday = day; // copy the first day recorded
+		tempmonth = month; // stores the current month
+		while(month == tempmonth) // while data is still in the current month
 		{
-			tCases += Data.daily[i].cases;
-			tDeaths += Data.daily[i].deaths;
-			day = atol(Data.daily[i].date + 8);
-			i++;
-			month = atol(Data.daily[i].date + 5);
+			tCases += Data.daily[i].cases;        //Computes total cases
+			tDeaths += Data.daily[i].deaths;      //Computes total deaths
+			day = atol(Data.daily[i].date + 8);   
+			i++;                                  
+			month = atol(Data.daily[i].date + 5); 
 		}
 		Print_MonthSummary(tempmonth,firstday,day,year,tCases,tDeaths);
 	}

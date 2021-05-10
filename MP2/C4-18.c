@@ -28,9 +28,7 @@
 
 
 /*
-	Describe briefly what this function will do.
-  
-  Compares date to all dates and returns 
+  Search the structure for data contained in the date provided using binary search method.
 */
 int
 COVID_Search( StrDate param_date, country Data) /* TO DO: fill up the parameter data type. */
@@ -43,11 +41,11 @@ COVID_Search( StrDate param_date, country Data) /* TO DO: fill up the parameter 
 	{
 		mid = (low + high) /2;
 		if(strcmp(param_date, Data.daily[mid].date) == 0)
-			found = 1;
+			found = 1; // found the date matching the parameter
 		else if(strcmp(param_date, Data.daily[mid].date) < 0)
-			high = mid -1;
+			high = mid -1; //decreases the size of the range by decreasing the upper value
 		else
-			low = mid + 1;
+			low = mid + 1; //decreases the size of the range by increasing the lower value
 	}
 	if (found)
 		return mid;

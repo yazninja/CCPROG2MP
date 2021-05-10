@@ -28,8 +28,7 @@
 
 
 /*
-	Describe briefly what this function will do.
-  Copy the country name to the country structure then fill the  day structure with inforamtion. While all are successful, the program moves to the next day.
+  Initialize the country structure with the contents of the file.
 */
 void
 Input_COVID_Data( char * param_country, country * ptrData )  /* TO DO: fill up the parameter data type. */
