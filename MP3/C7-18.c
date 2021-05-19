@@ -47,16 +47,16 @@ Read_COVID_Data(char *param_country, country *ptrData)  /* TO DO: fill up the pa
 	/* Declare your own local variables. */	
 	FILE *fp;
   	int i=0;
-	string temp = "MP3/CHD/";
+	string filename = "CHD/";
 	/* Document your solution with sensible inline comments. */
 	
-  	strcpy(param_country,strcat(temp,param_country));
-	strcat(param_country,".txt");
-	//printf("%s\n", param_country);
-	fp = fopen(param_country, "r");
-	if(fp != NULL ||)
+	strcat(filename,param_country);
+	strcat(filename,".txt");
+	fp = fopen(filename, "r");
+	if(fp != NULL)
 	{
 		strcpy(ptrData->name,param_country);
+		printf("%s\n",ptrData->name);
 		while(fscanf(fp,"%s %d %d %ld %f",ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
 			i++;
 		ptrData->count = i;

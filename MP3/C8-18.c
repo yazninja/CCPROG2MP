@@ -82,7 +82,7 @@ printToFile(country cArr[], int nCountry, char * file_output_name)
 		}
 		fCases = (tCases / cArr[i].population) * 100;
 		fDeaths = (tDeaths / cArr[i].population) * 100;
-		fprintf(fpw,"%35s%10ld%10d%10.6f%10d%10.6f\n", cArr[i].name, cArr[i].population,tCases,fCases,tDeaths,fDeaths);
+		fprintf(fpw,"%-35s%10ld\t%10d\t%10.6f%10d%10.6f\n", cArr[i].name, cArr[i].population,tCases,fCases,tDeaths,fDeaths);
 	}
 	fclose(fpw);
 }
@@ -113,21 +113,26 @@ Stats_C8(char *param_output_filename, char *param_input_filename)
 	/* Declare your own local variables. */
 	FILE *fpr;
   	int i=0;
-	char * country_name;
+	string country_name;
 	country cArray[NUM_COUNTRIES];
 	/* Document your solution with sensible inline comments. */
 	fpr = fopen(param_input_filename, "r");
 	if(fpr != NULL)
 	{
 		while(fscanf(fpr,"%s",country_name) == 1)
+		{
 			if(Read_COVID_Data(country_name,&cArray[i]) == 1) /*read Covid data*/
 				i++;
+		}
+			
+		printf("NUM: %d\n", i);
 		selectionSort(cArray,i); /*call sort algorithm*/
 		printToFile(cArray,i,param_output_filename);
     	
 		fclose(fpr);
+		return 1;
 	}
-	fprintf(stderr,"%s file not found", param_input_filename);	  
+	fprintf(stderr,"%s file not found\n", param_input_filename);	  
 	return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */   
 }
 
