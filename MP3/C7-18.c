@@ -1,9 +1,9 @@
 /*
-    LASTNAME1, FIRSTNAME1:  					  	SECTION1:      
+    LASTNAME1, FIRSTNAME1: Grasparil, David Nikolai 	SECTION1: S15    
     
-	LASTNAME2, FIRSTNAME2:     						SECTION2:    
+	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean      		SECTION2: S15    
 
-	DATE SUBMITTED      :
+	DATE SUBMITTED      : May 19.2021
 	
 	Do not forget to ENCODE your name/s, section/s and date on the space indicated above.
 		
@@ -42,14 +42,23 @@
 	       Replace this comment with a brief description of what the function will do.
 */
 int
-Read_COVID_Data(char *param_country, __________ *ptrData)  /* TO DO: fill up the parameter data type. */
+Read_COVID_Data(char *param_country, country *ptrData)  /* TO DO: fill up the parameter data type. */
 {
 	/* Declare your own local variables. */	
-
+	FILE *fp;
+  int i;
 	/* Document your solution with sensible inline comments. */
-	
-
-   return 888;  /* Don't forget the return statement. Replace 888 with the appropriate value. */   
+	strcat(param_country,".txt");
+	fp = fopen(param_country, "r");
+	if(fp != NULL)
+	{
+		while(fscanf(fp,"%s %d %d %ld %f",ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
+			i++;
+		fclose(fp);
+		return 1;
+	}
+	fprintf(stderr,"No data for %s", param_country);
+   return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */   
 }
 
 
