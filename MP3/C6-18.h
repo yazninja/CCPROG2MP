@@ -1,9 +1,9 @@
 /*
-    LASTNAME1, FIRSTNAME1:  					  	SECTION1:      
+    LASTNAME1, FIRSTNAME1: Grasparil, David Nikolai 	SECTION1: S15    
     
-	LASTNAME2, FIRSTNAME2:     						SECTION2:    
+	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean      		SECTION2: S15    
 
-	DATE SUBMITTED      :
+	DATE SUBMITTED      : May 19.2021
 	
 	Do not forget to ENCODE your name/s, section/s and date on the space indicated above.
 		
@@ -24,7 +24,7 @@
 		   	   digit group number, encode it with a leading 0.  For example, if your are group number 8, then Line 27
    			   should become #define GROUP_NUMBER "08".
    	*/
-   	#define GROUP_NUMBER  "88"
+   	#define GROUP_NUMBER  "18"
 
 
 	/* 
@@ -41,7 +41,7 @@
 	/*
 		You may add your own macro definitions right after this comment.
 	*/
-
+	#define MAX 500
 
 
 
@@ -62,15 +62,27 @@
 		Add codes from your C2-NUMBER.h header file right after this comment.  Note that you may still 
 		edit/change the copied contents as you deem fit for your solutions to Challenges C7 to C9. 
 	*/
+struct data
+{
+	StrDate date;
+	int cases;
+	int deaths;
+};
 
-
-
+struct status
+{
+	string name;
+	long int population;
+	float lifeExpectancy;
+	day daily[MAX];
+	int count;
+};
 	/*
 		You may add other structure data type declarations and optionally their corresponding 
 		typedef declarations (aliases) right after this comment.		
 	*/	
-
-
+typedef struct data day;
+typedef struct status country;
 
 	/*
 		TO DO: add the function prototypes for all functions that you defined in order accomplish to Challenges C7 to C9.
