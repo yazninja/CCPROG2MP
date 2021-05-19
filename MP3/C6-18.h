@@ -42,7 +42,7 @@
 		You may add your own macro definitions right after this comment.
 	*/
 	#define MAX 500
-
+	#define MAX_STRING 33
 
 
 	/*
@@ -55,12 +55,17 @@
 	/*
 		You may add your own typedef for OTHER  string aliases right after this comment.	
 	*/
-
+typedef char string[MAX_STRING];
 
 
 	/*
 		Add codes from your C2-NUMBER.h header file right after this comment.  Note that you may still 
 		edit/change the copied contents as you deem fit for your solutions to Challenges C7 to C9. 
+	*/
+
+	/*
+		You may add other structure data type declarations and optionally their corresponding 
+		typedef declarations (aliases) right after this comment.		
 	*/
 struct data
 {
@@ -68,7 +73,7 @@ struct data
 	int cases;
 	int deaths;
 };
-
+typedef struct data day;
 struct status
 {
 	string name;
@@ -76,18 +81,14 @@ struct status
 	float lifeExpectancy;
 	day daily[MAX];
 	int count;
-};
-	/*
-		You may add other structure data type declarations and optionally their corresponding 
-		typedef declarations (aliases) right after this comment.		
-	*/	
-typedef struct data day;
+};	
+
 typedef struct status country;
 
 	/*
 		TO DO: add the function prototypes for all functions that you defined in order accomplish to Challenges C7 to C9.
 	*/
-
+int Read_COVID_Data(char *param_country, country *ptrData);
 
 #endif
 

@@ -39,15 +39,18 @@
 /*
 	TO DO: Implement Read_COVID_Data().
 	
-	       Replace this comment with a brief description of what the function will do.
+	       Reads text file.
 */
 int
 Read_COVID_Data(char *param_country, country *ptrData)  /* TO DO: fill up the parameter data type. */
 {
 	/* Declare your own local variables. */	
 	FILE *fp;
-  int i;
+  	int i;
+	string temp = "CHD/";
 	/* Document your solution with sensible inline comments. */
+	
+  	strcpy(param_country,strcat(temp,param_country));
 	strcat(param_country,".txt");
 	fp = fopen(param_country, "r");
 	if(fp != NULL)

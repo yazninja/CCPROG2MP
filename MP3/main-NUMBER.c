@@ -31,10 +31,10 @@
 /*
     TO DO: change the four #include below to your own file/solution. You are not allowed to include other files.
 */	
-#include "C6-NUMBER.h"
-#include "C7-NUMBER.c"
-#include "C8-NUMBER.c"
-#include "C9-NUMBER.c"
+#include "C6-18.h"
+#include "C7-18.c"
+#include "C8-18.c"
+//#include "C9-NUMBER.c"
 
 
 /*
@@ -59,7 +59,7 @@ main()
 	char C7_test_data[5][35] = { "ARGENTINA", "JAPAN", "PHILIPPINES", "ZIMBABWE", "XYZ" };
 
 	/* TO DO: supply the data type of variable Data.  Use the alias you declared in C6-NUMBER.h. */
-	_______ Data;    
+	country Data;    
 	
 
 /*------------------------------------------------------------------
@@ -73,10 +73,10 @@ main()
 		strcpy(param_country, C7_test_data[i]);
 		result = Read_COVID_Data(param_country,  &Data);
 		if (result) {
-			printf("%s  ", Data.__________);  /* TO DO: print country name. */
-			printf("%ld ", Data.__________);  /* TO DO: print population. */ 
-			printf("%.2f ", Data._________);  /* TO DO: print life_expectancy */
-			printf("%s %d %d\n", Data.______, Data.______, Data.______); /* TO DO: print the last row of data, i.e, date, new_cases and new_deaths. */
+			printf("%s  ", Data.name);  /* TO DO: print country name. */
+			printf("%ld ", Data.population);  /* TO DO: print population. */ 
+			printf("%.2f ", Data.lifeExpectancy);  /* TO DO: print life_expectancy */
+			printf("%s %d %d\n", Data.daily[Data.count-1].date, Data.daily[Data.count-1].cases, Data.daily[Data.count-1].deaths); /* TO DO: print the last row of data, i.e, date, new_cases and new_deaths. */
 		}
 	}
 	printf("\n\n");	
@@ -117,7 +117,7 @@ main()
 	
 	DO NOT CHANGE THE FOLLOWING LINES OF CODES!
 -------------------------------------------------------------------*/
-	printf("**TEST-C9**\n");	
+/*	printf("**TEST-C9**\n");	
 	// Test Case #1 using COUNTRIES.TXT file
 	strcat(strcat(strcpy(output_filename, "C9-"), GROUP_NUMBER), "-OUTPUT1.TXT");
 	printf("output_filename = %s\n", output_filename);
@@ -137,7 +137,7 @@ main()
 	// Test Case #3 using a non-existent input file 
 	result = Stats_C9("DUMMY.TXT", "WALA-ITO.TXT");
 	printf("result = %d\n", result);
-	
+*/	
 	
 	return 0;
 }

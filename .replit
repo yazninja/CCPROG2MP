@@ -1,2 +1,2 @@
 language = "c"
-run = "gcc -Wall MP2/MP2-08.c -o MP2/MP2-08 && MP2/./'MP2-08' < MP2/PHILIPPINES.txt"
+run = "gcc -Wall MP3/main-NUMBER.c -o MP3/main-NUMBER && MP3/main-NUMBER"
