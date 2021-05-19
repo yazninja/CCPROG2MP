@@ -46,21 +46,24 @@ Read_COVID_Data(char *param_country, country *ptrData)  /* TO DO: fill up the pa
 {
 	/* Declare your own local variables. */	
 	FILE *fp;
-  	int i;
-	string temp = "CHD/";
+  	int i=0;
+	string temp = "MP3/CHD/";
 	/* Document your solution with sensible inline comments. */
 	
   	strcpy(param_country,strcat(temp,param_country));
 	strcat(param_country,".txt");
+	//printf("%s\n", param_country);
 	fp = fopen(param_country, "r");
-	if(fp != NULL)
+	if(fp != NULL ||)
 	{
+		strcpy(ptrData->name,param_country);
 		while(fscanf(fp,"%s %d %d %ld %f",ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
 			i++;
+		ptrData->count = i;
 		fclose(fp);
 		return 1;
 	}
-	fprintf(stderr,"No data for %s", param_country);
+	fprintf(stderr,"No data for %s\n", param_country);
    return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */   
 }
 

@@ -73,9 +73,12 @@ main()
 		strcpy(param_country, C7_test_data[i]);
 		result = Read_COVID_Data(param_country,  &Data);
 		if (result) {
-			printf("%s  ", Data.name);  /* TO DO: print country name. */
-			printf("%ld ", Data.population);  /* TO DO: print population. */ 
-			printf("%.2f ", Data.lifeExpectancy);  /* TO DO: print life_expectancy */
+			
+			printf("%s\n", Data.name);  /* TO DO: print country name. */
+			
+			printf("%ld\n", Data.population);  /* TO DO: print population. */ 
+			
+			printf("%.2f\n", Data.lifeExpectancy);  /* TO DO: print life_expectancy */
 			printf("%s %d %d\n", Data.daily[Data.count-1].date, Data.daily[Data.count-1].cases, Data.daily[Data.count-1].deaths); /* TO DO: print the last row of data, i.e, date, new_cases and new_deaths. */
 		}
 	}
