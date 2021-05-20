@@ -3,7 +3,7 @@
     
 	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean      		SECTION2: S15    
 
-	DATE SUBMITTED      : May 19.2021
+	DATE SUBMITTED      : May 20,2021
 	
 	Do not forget to ENCODE your name/s, section/s and date on the space indicated above.
 		
@@ -56,7 +56,6 @@ Read_COVID_Data(char *param_country, country *ptrData)  /* TO DO: fill up the pa
 	if(fp != NULL)
 	{
 		strcpy(ptrData->name,param_country);
-		printf("%s\n",ptrData->name);
 		while(fscanf(fp,"%s %d %d %ld %f",ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
 			i++;
 		ptrData->count = i;

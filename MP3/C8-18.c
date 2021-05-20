@@ -1,9 +1,9 @@
 /*
-    ASTNAME1, FIRSTNAME1: Grasparil, David Nikolai 		SECTION1: S15    
+    LASTNAME1, FIRSTNAME1: Grasparil, David Nikolai 	SECTION1: S15    
     
 	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean      		SECTION2: S15    
 
-	DATE SUBMITTED      : May 19.2021
+	DATE SUBMITTED      : May 20,2021
 	
 	Do not forget to ENCODE your name/s, section/s and date on the space indicated above.
 		
@@ -40,67 +40,54 @@
 	
 	Don't forget to encode the function prototypes in C6-NUMBER.h header file.
 */
-
+void swap(country *cArr1, country *cArr2)
+{
+	country temp;
+			
+	temp = *cArr1;
+	*cArr1 = *cArr2;
+	*cArr2 = temp;
+}
 
 void 
 selectionSort(country cArr[], int nCountry)
 {
 	int i, j, key; 
-  string kName; 
-  country temp;
 	
 	for (i = 0; i < nCountry - 1; i++)
 	{
-		strcpy(kName, cArr[i].name);
+		key = i;
 
 		for (j = i + 1; j < nCountry ; j++)
-    	{
-			strcpy(kName, cArr[i].name);
-
-			if (strcmp(kName,cArr[j].name) < 0)
+			if (strcmp(cArr[key].name,cArr[j].name) > 0)
 				key = j;
-		}
-		temp = cArr[key];
-		cArr[key] = cArr[i];
-		cArr[i] = temp;
+
+		swap(&cArr[i], &cArr[key]);
 	}
 }
+
 
 void 
 printToFile(country cArr[], int nCountry, char * file_output_name)
 {
 	FILE *fpw;
 	int i,j,tCases,tDeaths;
-	float fCases, fDeaths;
+	float fCases=0, fDeaths=0;
 	fpw = fopen(file_output_name, "w");
 	for(i = 0; i < nCountry; i++)
 	{
+		tCases=0; tDeaths=0;
 		for(j = 0; j < cArr[i].count; j++)
 		{
 			tCases += cArr[i].daily[j].cases;        //Computes total cases
 			tDeaths += cArr[i].daily[j].deaths;      //Computes total deaths
 		}
-		fCases = (tCases / cArr[i].population) * 100;
-		fDeaths = (tDeaths / cArr[i].population) * 100;
+		fCases = (float) tCases / cArr[i].population *100;
+		fDeaths = (float) tDeaths / cArr[i].population * 100;
 		fprintf(fpw,"%-35s%10ld\t%10d\t%10.6f%10d%10.6f\n", cArr[i].name, cArr[i].population,tCases,fCases,tDeaths,fDeaths);
 	}
 	fclose(fpw);
 }
-
-/*
-The function should write SIX columns of values listed below into an output text file named param_output_filename. The 
-output data should be in alphabetical order by country name. 
-1. country name
-2. population
-3. total number of cases
-4. percentage of the number of cases with respect to the population
-5. total number of deaths
-6. percentage of the number of deaths with respect to the population
-The percentage values should be printed as a floating point with six digits after the decimal point. You are free to decide on how 
-much space you would like to put in between columns.
-
-*/
-
 
 /*
 	TO DO: Implement Stats_C8().  Call the helper functions that you defined above.
@@ -124,8 +111,6 @@ Stats_C8(char *param_output_filename, char *param_input_filename)
 			if(Read_COVID_Data(country_name,&cArray[i]) == 1) /*read Covid data*/
 				i++;
 		}
-			
-		printf("NUM: %d\n", i);
 		selectionSort(cArray,i); /*call sort algorithm*/
 		printToFile(cArray,i,param_output_filename);
     	

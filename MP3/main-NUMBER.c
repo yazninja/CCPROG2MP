@@ -120,7 +120,7 @@ main()
 	
 	DO NOT CHANGE THE FOLLOWING LINES OF CODES!
 -------------------------------------------------------------------*/
-/*	printf("**TEST-C9**\n");	
+	printf("**TEST-C9**\n");	
 	// Test Case #1 using COUNTRIES.TXT file
 	strcat(strcat(strcpy(output_filename, "C9-"), GROUP_NUMBER), "-OUTPUT1.TXT");
 	printf("output_filename = %s\n", output_filename);
@@ -140,7 +140,7 @@ main()
 	// Test Case #3 using a non-existent input file 
 	result = Stats_C9("DUMMY.TXT", "WALA-ITO.TXT");
 	printf("result = %d\n", result);
-*/	
+	
 	
 	return 0;
 }
