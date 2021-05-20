@@ -1,9 +1,9 @@
 /*
-    LASTNAME1, FIRSTNAME1:  					  	SECTION1:      
+    LASTNAME1, FIRSTNAME1: Grasparil, David Nikolai 	SECTION1: S15    
     
-	LASTNAME2, FIRSTNAME2:     						SECTION2:    
+	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean      		SECTION2: S15    
 
-	DATE SUBMITTED      :
+	DATE SUBMITTED      : May 20,2021
 	
 	Do not forget to ENCODE your name/s, section/s and date on the space indicated above.
 		
@@ -58,11 +58,28 @@ int
 Stats_C9(char *param_output_filename, char *param_input_filename)
 {
 	/* Declare your own local variables. */
-
+	FILE *fp;
+	int i;
+	string country_name;
+	country cArray[NUM_COUNTRIES];
+	continent world[NUM_CONTINENTS];
 	/* Document your solution with sensible inline comments. */
-	
+	fp = fopen(param_input_filename, "r"); // read file
+	if(fp != NULL) // make sure file has data
+	{
+		while(fscanf(fp,"%s",country_name) == 1) // get country name
+		{
+			//get continent of country
+			//get all data from the continent and store to world[] if not already added
+			//sort world[]
+			//print world to file
+		}
+		fclose(fp);
+		return 1;
+	}
 
-   return 888;  /* Don't forget the return statement. Replace 888 with the appropriate value. */
+	printf(stderr,"%s file not found\n", param_input_filename);	  
+	return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */
 }
 
 

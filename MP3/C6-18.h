@@ -74,7 +74,8 @@ struct data
 	int deaths;
 };
 typedef struct data day;
-struct status
+
+struct national
 {
 	string name;
 	long int population;
@@ -82,13 +83,26 @@ struct status
 	day daily[MAX];
 	int count;
 };	
+typedef struct national country;
 
-typedef struct status country;
+struct regional
+{
+	string name;
+	long int population;
+	int totalCases, totalDeaths;
+	float percentCases, percentDeaths;
+};
+typedef struct regional continent;
 
 	/*
 		TO DO: add the function prototypes for all functions that you defined in order accomplish to Challenges C7 to C9.
 	*/
 int Read_COVID_Data(char *param_country, country *ptrData);
+
+void swap(country *cArr1, country *cArr2);
+void selectionSort(country cArr[], int nCountry);
+void printToFile(country cArr[], int nCountry, char * file_output_name);
+int Stats_C8(char *param_output_filename, char *param_input_filename);
 
 #endif
 
