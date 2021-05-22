@@ -50,22 +50,22 @@ void swapCon(continent *aCon1, continent *aCon2)
 	*aCon2 = temp;
 }
 
-void 
-sortContinent(continent aConti[], int nContinent)
-{
-	int i, j, key; 
+// void 
+// byeContinent(continent aConti[], int nContinent)
+// {
+// 	int i, j, key; 
 	
-	for (i = 0; i < nContinent - 1; i++)
-	{
-		key = i;
+// 	for (i = 0; i < nContinent - 1; i++)
+// 	{
+// 		key = i;
 
-		for (j = i + 1; j < nContinent ; j++)
-			if (strcmp(aConti[key].name,aConti[j].name) > 0)
-				key = j;
+// 		for (j = i + 1; j < nContinent ; j++)
+// 			if (strcmp(aConti[key].name,aConti[j].name) > 0)
+// 				key = j;
 
-		swapCon(&aConti[i], &aConti[key]);
-	}
-}
+// 		swapCon(&aConti[i], &aConti[key]);
+// 	}
+// }
 
 int getContinent (char * country, char * continent, FILE *fp)
 {
@@ -117,7 +117,7 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 }	
 	
 int
-Binary_Search(char * country, char * continent, FILE *fp)
+sortContinent(char * country, char * continent, FILE *fp)
 {
     int low = 0, high = NUM_COUNTRIES - 1, mid;
     int found = 0;
