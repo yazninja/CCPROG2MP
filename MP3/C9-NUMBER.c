@@ -58,7 +58,7 @@ sortContinent(continent aConti[], int nContinent)
 	for (i = 0; i < nContinent - 1; i++)
 	{
 		key = i;
-
+		printf("%d. continent: %s\n", i, aConti[i].name);
 		for (j = i + 1; j < nContinent ; j++)
 			if (strcmp(aConti[key].name,aConti[j].name) > 0)
 				key = j;
@@ -98,9 +98,10 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 	world[*nContinents].totalCases = 0;
 	world[*nContinents].totalDeaths = 0;
 	world[*nContinents].population = 0;
+	strcpy(world[*nContinents].name, continent_name); // name
 	for (i=0; i < count + 1; i++)
 	{
-		strcpy(world[*nContinents].name, continent_name); // name
+		
 		world[*nContinents].population += region[i].population; // population
 		for(j=0; j < region[i].count; j++)
 		{
@@ -182,8 +183,10 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 			if(getContinent(country_name,continent_name,pair)) //get continent of country
 				Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added	
 		}
+			
 		sortContinent(world, i); //sort world[]
 		printf("\nbefore: %d\n", i);
+		
 		printContinents(param_output_filename, world, i);//print world to file
 		printf("\nafter\n");
 		fclose(fp);
