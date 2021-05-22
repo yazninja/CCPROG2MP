@@ -77,7 +77,8 @@ main()
 			printf("%s\n", Data.name);  /* TO DO: print country name. */
 			printf("%ld\n", Data.population);  /* TO DO: print population. */ 
 			
-			printf("%.2f\n", Data.lifeExpectancy);  /* TO DO: print life_expectancy */
+			printf("%.2f\n", Data.lifeExpectancy);
+			  /* TO DO: print life_expectancy */
 			printf("%s %d %d\n", Data.daily[Data.count-1].date, Data.daily[Data.count-1].cases, Data.daily[Data.count-1].deaths); /* TO DO: print the last row of data, i.e, date, new_cases and new_deaths. */
 		}
 	}
@@ -133,7 +134,7 @@ main()
 	
 	printf("input_filename = %s\n", input_filename);
 	printf("output_filename = %s\n", output_filename);
-	result = Stats_C9(output_filename, "COUNTRIES.TXT");
+	result = Stats_C9(output_filename, input_filename);
 	printf("result = %d\n", result);
 	
 	// Test Case #3 using a non-existent input file 
