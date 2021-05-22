@@ -67,17 +67,7 @@ sortContinent(continent aConti[], int nContinent)
 	}
 }
 
-// int getContinent (char * country, char * continent, FILE *fp)
-// {
-// 	string tempCountry, tempContinent;
-// 	while(fscanf(fp,"%s %s", tempContinent, tempCountry) == 2)
-// 		if(strcmp(country,tempCountry) == 0)
-// 		{
-// 			strcpy(continent,tempContinent);
-// 			return 1;
-// 		}
-// 	return 0;
-// }
+
 
 void Read_Continent_Data(char * continent_name, continent world[], int *nContinents, FILE *fp)
 {
@@ -86,7 +76,7 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 	int i, j, count=0;
 	FILE *fC;
 	fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
-	
+
 	for(i=0; i < *nContinents; i++) // check if continent exists
 		if(strcmp(continent_name,world[i].name) == 0)
 		{
@@ -96,26 +86,28 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 			
 	for(i=0; i < NUM_COUNTRIES; i++) // store in region[] if same region
 	{
-		fscanf(fp,"%s %s", tempContinent, tempCountry);
+		fscanf(fC,"%s %s", tempContinent, tempCountry);
 		if(strcmp(tempContinent,continent_name) == 0)
 		{
 			Read_COVID_Data(tempCountry,&region[i]);
 			count++;
 		}		
 	}
+	printf("COUNT: %d", count);
 	for (i=0; i < count; i++)
 	{
 		strcpy(world[*nContinents].name, continent_name); // name
 		world[*nContinents].population += region[i].population; // population
 		for(j=0; j < region[i].count; j++)
 		{
+			printf("%d :: %d\n",i, world[*nContinents].totalCases);
 			world[*nContinents].totalCases += region[i].daily[j].cases; // cases
 			world[*nContinents].totalDeaths += region[i].daily[j].deaths; //deaths
 		}
 		world[*nContinents].percentCases = (float) world[*nContinents].totalCases / world[*nContinents].population * 100; // percentCases
 		world[*nContinents].percentDeaths = (float) world[*nContinents].totalDeaths / world[*nContinents].population * 100; // percentDeaths
-		(*nContinents)++;
-	} 
+	}
+	(*nContinents)++; 
 }	
 	
 int
@@ -151,7 +143,7 @@ void printContinents(char * file_output, continent world[], int nContinents)
 	int i;
 	fpw = fopen(file_output, "w");
 	for(i = 0; i < nContinents; i++)
-		printf("%-20s%10ld\t\t%10d\t%10.6f\t\t%10d\t%10.6f", world[i].name, world[i].population, world[i].totalCases, world[i].percentCases, world[i].totalDeaths, world[i].percentDeaths);
+		fprintf(fpw,"%-20s%10ld\t\t%10d\t%10.6f\t\t%10d\t%10.6f\n", world[i].name, world[i].population, world[i].totalCases, world[i].percentCases, world[i].totalDeaths, world[i].percentDeaths);
 	fclose(fpw);
 }
 /*
