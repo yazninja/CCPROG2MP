@@ -62,11 +62,6 @@ typedef char string[MAX_STRING];
 		Add codes from your C2-NUMBER.h header file right after this comment.  Note that you may still 
 		edit/change the copied contents as you deem fit for your solutions to Challenges C7 to C9. 
 	*/
-
-	/*
-		You may add other structure data type declarations and optionally their corresponding 
-		typedef declarations (aliases) right after this comment.		
-	*/
 struct data
 {
 	StrDate date;
@@ -84,6 +79,11 @@ struct national
 	int count;
 };	
 typedef struct national country;
+	/*
+		You may add other structure data type declarations and optionally their corresponding 
+		typedef declarations (aliases) right after this comment.		
+	*/
+
 
 struct regional
 {
@@ -94,6 +94,10 @@ struct regional
 };
 typedef struct regional continent;
 
+struct area{
+	string cont, countries;
+};
+typedef struct area sign;
 	/*
 		TO DO: add the function prototypes for all functions that you defined in order accomplish to Challenges C7 to C9.
 	*/

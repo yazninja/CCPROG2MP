@@ -114,30 +114,38 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 	(*nContinents)++; 
 }	
 	
+void setupContinent(sign c[]){
+    FILE *fC;
+    int i = 0;
+    fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
+    while(fscanf(fC,"%s %s", c[i].cont, c[i].countries) == 2){
+        i++;
+    }
+    fclose(fC);
+}
+
 int
-getContinent(char * country, char * continent)
+getContinent(char * country, char * continent, sign list[])
 {
     int low = 0, high = NUM_COUNTRIES - 1, mid;
     int found = 0;
-	string tempCountry, tempContinent;
-	FILE *fC;
-	fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
-    while(!found && low <= high && fscanf(fC,"%s %s", tempContinent, tempCountry) == 2)
+    
+    while(!found && low <= high)
     {
         mid = (low + high) /2;
-        if(strcmp(country, tempCountry) == 0)
+        if(strcmp(country, list[mid].countries) == 0)
                 found = 1;
-        else if(strcmp(country, tempCountry) < 0)
+        else if(strcmp(country, list[mid].countries) < 0)
             high = mid -1;
         else
             low = mid + 1;
     }
-	fclose(fC);
+    
     if (found)
-	{
-		strcpy(continent,tempContinent);
-		return 1;
-	}    
+    {
+        strcpy(continent,list[mid].cont);
+        return 1;
+    }    
     return 0;     
 }
 
@@ -162,6 +170,7 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	FILE *fp;
 	int i=0;
 	string country_name, continent_name;
+	sign pair[NUM_COUNTRIES];
 	continent world[NUM_CONTINENTS];
 	/* Document your solution with sensible inline comments. */
 	fp = fopen(param_input_filename, "r"); // read file
@@ -169,9 +178,9 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	{
 		while(fscanf(fp,"%s",country_name) == 1) // get country name
 		{
-			getContinent(country_name,continent_name); //get continent of country
-			printf("%s :: %s\n", continent_name, country_name);
-				// Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added	
+			setupContinent(pair);
+			if(getContinent(country_name,continent_name,pair)) //get continent of country
+				Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added	
 		}
 		// sortContinent(world, i); //sort world[]
 		// printf("\nbefore: %d\n", i);
@@ -183,7 +192,6 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	fprintf(stderr,"%s file not found\n", param_input_filename);	  
 	return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */
 }
-
 
 /*******************************************************************************
     WARNING!!!   WARNING!!!   WARNING!!!    
