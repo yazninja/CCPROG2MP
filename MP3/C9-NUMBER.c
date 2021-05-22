@@ -77,36 +77,40 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 	FILE *fC;
 	fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
 
-	for(i=0; i < *nContinents; i++) // check if continent exists
-		if(strcmp(continent_name,world[i].name) == 0)
-		{
-			printf("DUPLICATE\n");
-			return;
-		}
-			
+	// for(i=0; i < *nContinents; i++) // check if continent exists
+	// 	if(strcmp(continent_name,world[i].name) == 0)
+	// 	{
+	// 		printf("DUPLICATE\n");
+	// 		return;
+	// 	}
+		
 	for(i=0; i < NUM_COUNTRIES; i++) // store in region[] if same region
 	{
 		fscanf(fC,"%s %s", tempContinent, tempCountry);
 		if(strcmp(tempContinent,continent_name) == 0)
 		{
+			printf("%s\n",tempCountry);
 			Read_COVID_Data(tempCountry,&region[i]);
 			count++;
 		}		
 	}
-	printf("COUNT: %d", count);
-	for (i=0; i < count; i++)
-	{
-		strcpy(world[*nContinents].name, continent_name); // name
-		world[*nContinents].population += region[i].population; // population
-		for(j=0; j < region[i].count; j++)
-		{
-			printf("%d :: %d\n",i, world[*nContinents].totalCases);
-			world[*nContinents].totalCases += region[i].daily[j].cases; // cases
-			world[*nContinents].totalDeaths += region[i].daily[j].deaths; //deaths
-		}
-		world[*nContinents].percentCases = (float) world[*nContinents].totalCases / world[*nContinents].population * 100; // percentCases
-		world[*nContinents].percentDeaths = (float) world[*nContinents].totalDeaths / world[*nContinents].population * 100; // percentDeaths
-	}
+	// printf("COUNT: %d", count);
+	// world[*nContinents].totalCases = 0;
+	// world[*nContinents].totalDeaths = 0;
+	// world[*nContinents].population = 0;
+	// for (i=0; i < count + 1; i++)
+	// {
+	// 	strcpy(world[*nContinents].name, continent_name); // name
+	// 	world[*nContinents].population += region[i].population; // population
+	// 	for(j=0; j < region[i].count; j++)
+	// 	{
+	// 		//printf("%s\t%d :: %d\n",region[i].name,j, world[*nContinents].totalCases);
+	// 		world[*nContinents].totalCases += region[i].daily[j].cases; // cases
+	// 		world[*nContinents].totalDeaths += region[i].daily[j].deaths; //deaths
+	// 	}
+	// 	world[*nContinents].percentCases = (float) world[*nContinents].totalCases / world[*nContinents].population * 100; // percentCases
+	// 	world[*nContinents].percentDeaths = (float) world[*nContinents].totalDeaths / world[*nContinents].population * 100; // percentDeaths
+	// }
 	(*nContinents)++; 
 }	
 	
@@ -171,9 +175,9 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 			}	
 		}
 		sortContinent(world, i); //sort world[]
-		printf("before: %d\n", i);
+		printf("\nbefore: %d\n", i);
 		printContinents(param_output_filename, world, i);//print world to file
-		printf("after\n");
+		printf("\nafter\n");
 		fclose(fp);
 		return 1;
 	} 
