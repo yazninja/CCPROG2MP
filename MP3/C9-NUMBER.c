@@ -140,8 +140,8 @@ void printContinents(char * file_output, continent world[], int nContinents)
 	float fCases=0, fDeaths=0;
 	fpw = fopen(file_output, "w");
 	for(i = 0; i < nContinents; i++)
-		fprintf(fpw, "%s")
-	fclose(fpw,"%-20s%10ld\t\t%10d\t%10.6f\t\t%10d\t%10.6f", world[i].name, world[i].population, world[i].totalCases, world[i].percentCases, world[i].totalDeaths, world[i].percentDeaths);
+		fprintf(fpw,"%-20s%10ld\t\t%10d\t%10.6f\t\t%10d\t%10.6f", world[i].name, world[i].population, world[i].totalCases, world[i].percentCases, world[i].totalDeaths, world[i].percentDeaths);
+	fclose(fpw);
 }
 /*
 	TO DO: Implement Stats_C9().  Call the helper functions that you defined above.
