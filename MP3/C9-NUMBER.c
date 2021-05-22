@@ -171,13 +171,14 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 		{
 			if(getContinent(country_name,continent_name)) //get continent of country
 			{
-				Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added
+				printf("%s\n", continent_name);
+				// Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added
 			}	
 		}
-		sortContinent(world, i); //sort world[]
-		printf("\nbefore: %d\n", i);
-		printContinents(param_output_filename, world, i);//print world to file
-		printf("\nafter\n");
+		// sortContinent(world, i); //sort world[]
+		// printf("\nbefore: %d\n", i);
+		// printContinents(param_output_filename, world, i);//print world to file
+		// printf("\nafter\n");
 		fclose(fp);
 		return 1;
 	} 
