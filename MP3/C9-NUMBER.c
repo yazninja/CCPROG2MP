@@ -50,13 +50,13 @@ int getContinent (char * country, char * continent, FILE *fp)
 			return 1;
 		}
 	return 0;
-
 }
-Read_Continent_Data(char * continent_name, continent world[], int nContinents, FILE *fp)
+
+void Read_Continent_Data(char * continent_name, continent world[], int nContinents, FILE *fp)
 {
 	country region[NUM_COUNTRIES];
 	string tempCountry, tempContinent;
-	int i, count=0;
+	int i, j, count=0;
 	for(i=0; i < nContinents; i++) // check if continent exists
 		if(strcmp(continent_name,world[i].name) == 0)
 			return;
@@ -66,23 +66,45 @@ Read_Continent_Data(char * continent_name, continent world[], int nContinents, F
 		fscanf(fp,"%s %s", tempContinent, tempCountry);
 		if(strcmp(tempContinent,continent_name) == 0)
 		{
-			Read_COVID_Data(tempCountry,&region);
+			Read_COVID_Data(tempCountry,&region[i]);
 			count++;
 		}		
 	}
 	for (i=0; i < count; i++)
 	{
-		strcpy(world[nContinents].name, continent_name);
-		world[nContinents].population += region[i].population;
-		world[nContinents].
+		strcpy(world[nContinents].name, continent_name); // name
+		world[nContinents].population += region[i].population; // population
+		for(j=0; j < region[i].count; j++)
+		{
+			world[nContinents].totalCases += region[i].daily[j].cases; // cases
+			world[nContinents].totalDeaths += region[i].daily[j].deaths; //deaths
+		}
+		world[nContinents].percentCases = (float) world[nContinents].totalCases / world[nContinents].population * 100; // percentCases
+		world[nContinents].percentDeaths = (float) world[nContinents].totalDeaths / world[nContinents].population * 100; // percentDeaths
 	} 
-
 }	
 	
+int
+Binary_Search(char * country, char * continent, FILE *fp)
+{
+    int low = 0, high = NUM_COUNTRIES - 1, mid;
+    int found = 0;
+	string tempCountry, tempContinent;
 	
-	
-
-
+    while(!found && low <= high && fscanf(fp,"%s %s", tempContinent, tempCountry) == 2)
+    {
+        mid = (low + high) /2;
+        if(strcmp(country, tempCountry) == 0)
+                found = 1;
+        else if(strcmp(country, tempCountry) < 0)
+            high = mid -1;
+        else
+            low = mid + 1;
+    }
+    if (found)
+        return mid;
+    return -1;     
+}
 
 
 
@@ -98,7 +120,6 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	FILE *fp;
 	int i=0;
 	string country_name, continent_name;
-	country cArray[NUM_COUNTRIES];
 	continent world[NUM_CONTINENTS];
 	/* Document your solution with sensible inline comments. */
 	fp = fopen(param_input_filename, "r"); // read file
@@ -106,9 +127,9 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	{
 		while(fscanf(fp,"%s",country_name) == 1) // get country name
 		{
-			if(getContinent(country_name,continent_name)) //get continent of country
+			if(getContinent(country_name,continent_name, fp)) //get continent of country
 			{
-				Read_Continent_Data(continent_name,&world, i, fp); //get all data from the continent and store to world[] if not already added
+				Read_Continent_Data(continent_name,world, i, fp); //get all data from the continent and store to world[] if not already added
 			}
 				
 		}
@@ -117,8 +138,7 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 		fclose(fp);
 		return 1;
 	}
-
-	printf(stderr,"%s file not found\n", param_input_filename);	  
+	fprintf(stderr,"%s file not found\n", param_input_filename);	  
 	return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */
 }
 
