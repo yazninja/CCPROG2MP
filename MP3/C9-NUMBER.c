@@ -40,6 +40,33 @@
 	
 	Don't forget to encode the function prototypes in C6-NUMBER.h header file.
 */
+
+void swapCon(continent *aCon1, continent *aCon2)
+{
+	continent temp;
+			
+	temp = *aCon1;
+	*aCon1 = *aCon2;
+	*aCon2 = temp;
+}
+
+void 
+sortContinent(continent aConti[], int nContinent)
+{
+	int i, j, key; 
+	
+	for (i = 0; i < nContinent - 1; i++)
+	{
+		key = i;
+
+		for (j = i + 1; j < nContinent ; j++)
+			if (strcmp(aConti[key].name,aConti[j].name) > 0)
+				key = j;
+
+		swapCon(&aConti[i], &aConti[key]);
+	}
+}
+
 int getContinent (char * country, char * continent, FILE *fp)
 {
 	string tempCountry, tempContinent;
@@ -106,11 +133,19 @@ Binary_Search(char * country, char * continent, FILE *fp)
     return -1;     
 }
 
-
-
+void printContinents(char * file_output, continent world[], int nContinents)
+{
+	FILE *fpw;
+	int i,j,tCases,tDeaths;
+	float fCases=0, fDeaths=0;
+	fpw = fopen(file_output, "w");
+	for(i = 0; i < nContinents; i++)
+		fprintf(fpw, "%s")
+	fclose(fpw,"%-20s%10ld\t\t%10d\t%10.6f\t\t%10d\t%10.6f", world[i].name, world[i].population, world[i].totalCases, world[i].percentCases, world[i].totalDeaths, world[i].percentDeaths);
+}
 /*
 	TO DO: Implement Stats_C9().  Call the helper functions that you defined above.
-      
+        
 	  	   Replace this comment with a brief description of what the function will do.
 */
 int 
@@ -133,15 +168,14 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 			}
 				
 		}
-		//sort world[]
-		//print world to file
+		sortContinent(world, i); //sort world[]
+		printContinents(param_output_filename, world, i);//print world to file
 		fclose(fp);
 		return 1;
-	}
+	} 
 	fprintf(stderr,"%s file not found\n", param_input_filename);	  
 	return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */
 }
-
 
 
 /*******************************************************************************
