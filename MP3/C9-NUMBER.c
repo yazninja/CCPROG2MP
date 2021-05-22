@@ -169,11 +169,9 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	{
 		while(fscanf(fp,"%s",country_name) == 1) // get country name
 		{
-			if(getContinent(country_name,continent_name)) //get continent of country
-			{
-				printf("%s\n", continent_name);
-				// Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added
-			}	
+			getContinent(country_name,continent_name); //get continent of country
+			printf("%s :: %s\n", continent_name, country_name);
+				// Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added	
 		}
 		// sortContinent(world, i); //sort world[]
 		// printf("\nbefore: %d\n", i);
