@@ -40,7 +40,44 @@
 	
 	Don't forget to encode the function prototypes in C6-NUMBER.h header file.
 */
-	
+int getContinent (char * country, char * continent, FILE *fp)
+{
+	string tempCountry, tempContinent;
+	while(fscanf(fp,"%s %s", tempContinent, tempCountry) == 2)
+		if(strcmp(country,tempCountry) == 0)
+		{
+			strcpy(continent,tempContinent);
+			return 1;
+		}
+	return 0;
+
+}
+Read_Continent_Data(char * continent_name, continent world[], int nContinents, FILE *fp)
+{
+	country region[NUM_COUNTRIES];
+	string tempCountry, tempContinent;
+	int i, count=0;
+	for(i=0; i < nContinents; i++) // check if continent exists
+		if(strcmp(continent_name,world[i].name) == 0)
+			return;
+	fseek(fp, 0, SEEK_SET); // place fp in beggining of file
+	for(i=0; i < NUM_COUNTRIES; i++) // store in region[] if same region
+	{
+		fscanf(fp,"%s %s", tempContinent, tempCountry);
+		if(strcmp(tempContinent,continent_name) == 0)
+		{
+			Read_COVID_Data(tempCountry,&region);
+			count++;
+		}		
+	}
+	for (i=0; i < count; i++)
+	{
+		strcpy(world[nContinents].name, continent_name);
+		world[nContinents].population += region[i].population;
+		world[nContinents].
+	} 
+
+}	
 	
 	
 	
@@ -59,8 +96,8 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 {
 	/* Declare your own local variables. */
 	FILE *fp;
-	int i;
-	string country_name;
+	int i=0;
+	string country_name, continent_name;
 	country cArray[NUM_COUNTRIES];
 	continent world[NUM_CONTINENTS];
 	/* Document your solution with sensible inline comments. */
@@ -69,11 +106,14 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	{
 		while(fscanf(fp,"%s",country_name) == 1) // get country name
 		{
-			//get continent of country
-			//get all data from the continent and store to world[] if not already added
-			//sort world[]
-			//print world to file
+			if(getContinent(country_name,continent_name)) //get continent of country
+			{
+				Read_Continent_Data(continent_name,&world, i, fp); //get all data from the continent and store to world[] if not already added
+			}
+				
 		}
+		//sort world[]
+		//print world to file
 		fclose(fp);
 		return 1;
 	}
