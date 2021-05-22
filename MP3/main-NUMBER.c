@@ -75,7 +75,6 @@ main()
 		if (result) {
 			
 			printf("%s\n", Data.name);  /* TO DO: print country name. */
-			
 			printf("%ld\n", Data.population);  /* TO DO: print population. */ 
 			
 			printf("%.2f\n", Data.lifeExpectancy);  /* TO DO: print life_expectancy */
