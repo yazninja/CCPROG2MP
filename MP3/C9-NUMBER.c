@@ -84,6 +84,9 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 	country region[NUM_COUNTRIES];
 	string tempCountry, tempContinent;
 	int i, j, count=0;
+	FILE *fC;
+	fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
+	
 	for(i=0; i < *nContinents; i++) // check if continent exists
 		if(strcmp(continent_name,world[i].name) == 0)
 		{
@@ -91,7 +94,6 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 			return;
 		}
 			
-	fseek(fp, 0, SEEK_SET); // place fp in beggining of file
 	for(i=0; i < NUM_COUNTRIES; i++) // store in region[] if same region
 	{
 		fscanf(fp,"%s %s", tempContinent, tempCountry);
@@ -117,13 +119,14 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 }	
 	
 int
-getContinent(char * country, char * continent, FILE *fp)
+getContinent(char * country, char * continent)
 {
     int low = 0, high = NUM_COUNTRIES - 1, mid;
     int found = 0;
 	string tempCountry, tempContinent;
-	
-    while(!found && low <= high && fscanf(fp,"%s %s", tempContinent, tempCountry) == 2)
+	FILE *fC;
+	fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
+    while(!found && low <= high && fscanf(fC,"%s %s", tempContinent, tempCountry) == 2)
     {
         mid = (low + high) /2;
         if(strcmp(country, tempCountry) == 0)
@@ -133,6 +136,7 @@ getContinent(char * country, char * continent, FILE *fp)
         else
             low = mid + 1;
     }
+	fclose(fC);
     if (found)
 	{
 		strcpy(continent,tempContinent);
@@ -144,8 +148,7 @@ getContinent(char * country, char * continent, FILE *fp)
 void printContinents(char * file_output, continent world[], int nContinents)
 {
 	FILE *fpw;
-	int i,j,tCases,tDeaths;
-	float fCases=0, fDeaths=0;
+	int i;
 	fpw = fopen(file_output, "w");
 	for(i = 0; i < nContinents; i++)
 		printf("%-20s%10ld\t\t%10d\t%10.6f\t\t%10d\t%10.6f", world[i].name, world[i].population, world[i].totalCases, world[i].percentCases, world[i].totalDeaths, world[i].percentDeaths);
@@ -168,12 +171,10 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	fp = fopen(param_input_filename, "r"); // read file
 	if(fp != NULL) // make sure file has data
 	{
-		printf("FILE: %p\n", fp);
 		while(fscanf(fp,"%s",country_name) == 1) // get country name
 		{
-			if(getContinent(country_name,continent_name, fp)) //get continent of country
+			if(getContinent(country_name,continent_name)) //get continent of country
 			{
-				printf("CONTINENT: %s", continent_name);
 				Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added
 			}	
 		}
