@@ -50,41 +50,41 @@ void swapCon(continent *aCon1, continent *aCon2)
 	*aCon2 = temp;
 }
 
-// void 
-// byeContinent(continent aConti[], int nContinent)
-// {
-// 	int i, j, key; 
-	
-// 	for (i = 0; i < nContinent - 1; i++)
-// 	{
-// 		key = i;
-
-// 		for (j = i + 1; j < nContinent ; j++)
-// 			if (strcmp(aConti[key].name,aConti[j].name) > 0)
-// 				key = j;
-
-// 		swapCon(&aConti[i], &aConti[key]);
-// 	}
-// }
-
-int getContinent (char * country, char * continent, FILE *fp)
+void 
+sortContinent(continent aConti[], int nContinent)
 {
-	string tempCountry, tempContinent;
-	while(fscanf(fp,"%s %s", tempContinent, tempCountry) == 2)
-		if(strcmp(country,tempCountry) == 0)
-		{
-			strcpy(continent,tempContinent);
-			return 1;
-		}
-	return 0;
+	int i, j, key; 
+	
+	for (i = 0; i < nContinent - 1; i++)
+	{
+		key = i;
+
+		for (j = i + 1; j < nContinent ; j++)
+			if (strcmp(aConti[key].name,aConti[j].name) > 0)
+				key = j;
+
+		swapCon(&aConti[i], &aConti[key]);
+	}
 }
+
+// int getContinent (char * country, char * continent, FILE *fp)
+// {
+// 	string tempCountry, tempContinent;
+// 	while(fscanf(fp,"%s %s", tempContinent, tempCountry) == 2)
+// 		if(strcmp(country,tempCountry) == 0)
+// 		{
+// 			strcpy(continent,tempContinent);
+// 			return 1;
+// 		}
+// 	return 0;
+// }
 
 void Read_Continent_Data(char * continent_name, continent world[], int *nContinents, FILE *fp)
 {
 	country region[NUM_COUNTRIES];
 	string tempCountry, tempContinent;
 	int i, j, count=0;
-	for(i=0; i < nContinents; i++) // check if continent exists
+	for(i=0; i < *nContinents; i++) // check if continent exists
 		if(strcmp(continent_name,world[i].name) == 0)
 		{
 			printf("DUPLICATE\n");
@@ -117,7 +117,7 @@ void Read_Continent_Data(char * continent_name, continent world[], int *nContine
 }	
 	
 int
-sortContinent(char * country, char * continent, FILE *fp)
+getContinent(char * country, char * continent, FILE *fp)
 {
     int low = 0, high = NUM_COUNTRIES - 1, mid;
     int found = 0;
@@ -134,8 +134,11 @@ sortContinent(char * country, char * continent, FILE *fp)
             low = mid + 1;
     }
     if (found)
-        return mid;
-    return -1;     
+	{
+		strcpy(continent,tempContinent);
+		return 1;
+	}    
+    return 0;     
 }
 
 void printContinents(char * file_output, continent world[], int nContinents)
@@ -170,6 +173,7 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 		{
 			if(getContinent(country_name,continent_name, fp)) //get continent of country
 			{
+				printf("CONTINENT: %s", continent_name);
 				Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added
 			}	
 		}
