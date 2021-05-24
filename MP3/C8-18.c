@@ -40,7 +40,11 @@
 	Don't forget to encode the function prototypes in C6-NUMBER.h header file.
 */
 
+<<<<<<< HEAD
 /*  */
+=======
+/* Swaps the array of structure */
+>>>>>>> cbb34dd0e30c044e2d0a5026bcb483381389f34b
 void selectionSort(country cArr[], int nCountry)
 {
 	country temp;
@@ -60,14 +64,18 @@ void selectionSort(country cArr[], int nCountry)
 	}
 }
 
+<<<<<<< HEAD
 /* */
+=======
+/* Computes the total cases, total deaths, percentage of cases, and percentage of deaths */
+>>>>>>> cbb34dd0e30c044e2d0a5026bcb483381389f34b
 void printToFile(country cArr[], int nCountry, char * file_output_name)
 {
 	FILE *fpw;
 	int i,j,tCases,tDeaths;
 	float fCases=0, fDeaths=0;
 	fpw = fopen(file_output_name, "w");
-	for(i = 0; i < nCountry; i++)
+	for(i = 0; i < nCountry; i++)                //loop for day
 	{
 		tCases=0; tDeaths=0;
 		for(j = 0; j < cArr[i].count; j++)
@@ -75,8 +83,8 @@ void printToFile(country cArr[], int nCountry, char * file_output_name)
 			tCases += cArr[i].daily[j].cases;        //Computes total cases
 			tDeaths += cArr[i].daily[j].deaths;      //Computes total deaths
 		}
-		fCases = (float) tCases / cArr[i].population *100;
-		fDeaths = (float) tDeaths / cArr[i].population * 100;
+		fCases = (float) tCases / cArr[i].population *100;        //Computes Percent of cases
+		fDeaths = (float) tDeaths / cArr[i].population * 100; //Computes Percent of deaths
 		fprintf(fpw,"%-35s%10ld\t%10d\t%10.6f%10d%10.6f\n", cArr[i].name, cArr[i].population,tCases,fCases,tDeaths,fDeaths);
 	}
 	fclose(fpw);
@@ -95,6 +103,7 @@ Stats_C8(char *param_output_filename, char *param_input_filename)
   	int i=0;
 	string country_name;
 	country cArray[NUM_COUNTRIES];
+  
 	/* Document your solution with sensible inline comments. */
 	fpr = fopen(param_input_filename, "r");
 	if(fpr != NULL) // check if file exists
@@ -104,7 +113,11 @@ Stats_C8(char *param_output_filename, char *param_input_filename)
 			if(Read_COVID_Data(country_name,&cArray[i]) == 1) // read Covid data
 				i++;
 		}
+<<<<<<< HEAD
 		selectionSort(cArray,i); // sort cArray
+=======
+		selectionSort(cArray,i); // sort cArray alphabetically
+>>>>>>> cbb34dd0e30c044e2d0a5026bcb483381389f34b
 		printToFile(cArray,i,param_output_filename); // print cArray
 		fclose(fpr);
 		return 1;

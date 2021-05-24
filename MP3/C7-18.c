@@ -56,9 +56,10 @@ Read_COVID_Data(char *param_country, country *ptrData)  /* TO DO: fill up the pa
 	if(fp != NULL)
 	{
 		strcpy(ptrData->name,param_country);
-		while(fscanf(fp,"%s %d %d %ld %f",ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5)
+		// if there are 5 variables scanned, move onto the next
+		while(fscanf(fp,"%s %d %d %ld %f",ptrData->daily[i].date, &ptrData->daily[i].cases, &ptrData->daily[i].deaths,&ptrData->population, &ptrData->lifeExpectancy) == 5) 
 			i++;
-		ptrData->count = i;
+		ptrData->count = i;   // total days for set country
 		fclose(fp);
 		return 1;
 	}
