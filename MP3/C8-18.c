@@ -40,11 +40,7 @@
 	Don't forget to encode the function prototypes in C6-NUMBER.h header file.
 */
 
-<<<<<<< HEAD
-/*  */
-=======
 /* Swaps the array of structure */
->>>>>>> cbb34dd0e30c044e2d0a5026bcb483381389f34b
 void selectionSort(country cArr[], int nCountry)
 {
 	country temp;
@@ -64,11 +60,7 @@ void selectionSort(country cArr[], int nCountry)
 	}
 }
 
-<<<<<<< HEAD
-/* */
-=======
 /* Computes the total cases, total deaths, percentage of cases, and percentage of deaths */
->>>>>>> cbb34dd0e30c044e2d0a5026bcb483381389f34b
 void printToFile(country cArr[], int nCountry, char * file_output_name)
 {
 	FILE *fpw;
@@ -113,11 +105,7 @@ Stats_C8(char *param_output_filename, char *param_input_filename)
 			if(Read_COVID_Data(country_name,&cArray[i]) == 1) // read Covid data
 				i++;
 		}
-<<<<<<< HEAD
-		selectionSort(cArray,i); // sort cArray
-=======
 		selectionSort(cArray,i); // sort cArray alphabetically
->>>>>>> cbb34dd0e30c044e2d0a5026bcb483381389f34b
 		printToFile(cArray,i,param_output_filename); // print cArray
 		fclose(fpr);
 		return 1;
