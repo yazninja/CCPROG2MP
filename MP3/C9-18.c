@@ -50,10 +50,9 @@ void sortContinent(continent aConti[], int nContinent)
 	for (i = 0; i < nContinent - 1; i++)
 	{
 		key = i;
-		printf("%d. continent: %s\n", i, aConti[i].name);
 		for (j = i + 1; j < nContinent ; j++)
-			if (strcmp(aConti[key].name,aConti[j].name) > 0)
-				key = j;
+			if (strcmp(aConti[key].name,aConti[j].name) > 0)  //compares key and continent array
+				key = j;      //index of continent is set to key
 
 		// swap elements
 		temp = aConti[i];
@@ -127,8 +126,8 @@ void Read_Continent_Data(char * continent_name, char * country_name, countryToCo
 			world[i].population += nation.population; // copy population
 			for(j=0; j < nation.count; j++) // copy daily data
 			{
-				world[i].totalCases += nation.daily[j].cases;
-				world[i].totalDeaths += nation.daily[j].deaths;
+				world[i].totalCases += nation.daily[j].cases;         //computes total cases from each country to world
+				world[i].totalDeaths += nation.daily[j].deaths;       //computes total death from each country to world
 			}
 			world[i].percentCases = (float) world[i].totalCases / world[i].population * 100; // solve percent of Cases accrd. by population
 			world[i].percentDeaths = (float) world[i].totalDeaths / world[i].population * 100; // solve percent of Deaths accrd. by population
@@ -167,6 +166,7 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	string country_name, continent_name;
 	countryToContinent pair[NUM_COUNTRIES];
 	continent world[NUM_CONTINENTS];
+  
 	/* Document your solution with sensible inline comments. */
 	fp = fopen(param_input_filename, "r"); // read file
 	if(fp != NULL) // make sure file has data
@@ -177,7 +177,7 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 			if(getContinent(country_name,continent_name,pair)) //get continent of country
 				Read_Continent_Data(continent_name,country_name,pair,world, &i); //get all data from the continent and store to world[] if not already added	
 		}
-		sortContinent(world, i); //sort world[]
+		sortContinent(world, i); //sort world[] alphabetically
 		printContinents(param_output_filename, world, i);//print world to file
 		fclose(fp);
 		return 1;
