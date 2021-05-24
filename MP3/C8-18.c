@@ -23,9 +23,8 @@
 /*
     TO DO: change the #include below to your own file/solution. You are not allowed to include other files.
 */
+
 #include "C6-18.h"
-
-
 
 /*
 	Challenge #8 is not trivial.  
@@ -40,18 +39,11 @@
 	
 	Don't forget to encode the function prototypes in C6-NUMBER.h header file.
 */
-void swap(country *cArr1, country *cArr2)
+
+/*  */
+void selectionSort(country cArr[], int nCountry)
 {
 	country temp;
-			
-	temp = *cArr1;
-	*cArr1 = *cArr2;
-	*cArr2 = temp;
-}
-
-void 
-selectionSort(country cArr[], int nCountry)
-{
 	int i, j, key; 
 	
 	for (i = 0; i < nCountry - 1; i++)
@@ -62,13 +54,14 @@ selectionSort(country cArr[], int nCountry)
 			if (strcmp(cArr[key].name,cArr[j].name) > 0)
 				key = j;
 
-		swap(&cArr[i], &cArr[key]);
+		temp = cArr[i];
+		cArr[i] = cArr[key];
+		cArr[key] = temp;
 	}
 }
 
-
-void 
-printToFile(country cArr[], int nCountry, char * file_output_name)
+/* */
+void printToFile(country cArr[], int nCountry, char * file_output_name)
 {
 	FILE *fpw;
 	int i,j,tCases,tDeaths;
@@ -92,7 +85,7 @@ printToFile(country cArr[], int nCountry, char * file_output_name)
 /*
 	TO DO: Implement Stats_C8().  Call the helper functions that you defined above.
       
-	  	   Replace this comment with a brief description of what the function will do.
+	  	   Compute the statistics for each country listed in the input text file. 
 */
 int 
 Stats_C8(char *param_output_filename, char *param_input_filename)
@@ -104,19 +97,19 @@ Stats_C8(char *param_output_filename, char *param_input_filename)
 	country cArray[NUM_COUNTRIES];
 	/* Document your solution with sensible inline comments. */
 	fpr = fopen(param_input_filename, "r");
-	if(fpr != NULL)
+	if(fpr != NULL) // check if file exists
 	{
-		while(fscanf(fpr,"%s",country_name) == 1)
+		while(fscanf(fpr,"%s",country_name) == 1) // get country name
 		{
-			if(Read_COVID_Data(country_name,&cArray[i]) == 1) /*read Covid data*/
+			if(Read_COVID_Data(country_name,&cArray[i]) == 1) // read Covid data
 				i++;
 		}
-		selectionSort(cArray,i); /*call sort algorithm*/
-		printToFile(cArray,i,param_output_filename);
-    	
+		selectionSort(cArray,i); // sort cArray
+		printToFile(cArray,i,param_output_filename); // print cArray
 		fclose(fpr);
 		return 1;
 	}
+	// print to stderr if file cannot be found
 	fprintf(stderr,"%s file not found\n", param_input_filename);	  
 	return 0;  /* Don't forget the return statement. Replace 888 with the appropriate value. */   
 }

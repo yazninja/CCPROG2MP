@@ -39,7 +39,7 @@
 /*
 	TO DO: Implement Read_COVID_Data().
 	
-	       Reads text file.
+	       Reads text file and stores the data in *ptrData.
 */
 int
 Read_COVID_Data(char *param_country, country *ptrData)  /* TO DO: fill up the parameter data type. */

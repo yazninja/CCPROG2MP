@@ -42,7 +42,6 @@
 		You may add your own macro definitions right after this comment.
 	*/
 	#define MAX 500
-	#define MAX_STRING 33
 
 
 	/*
@@ -55,58 +54,73 @@
 	/*
 		You may add your own typedef for OTHER  string aliases right after this comment.	
 	*/
-typedef char string[MAX_STRING];
+	typedef char string[41]; // 33 being the longest country characters + "CHD/" &".txt"
 
 
 	/*
 		Add codes from your C2-NUMBER.h header file right after this comment.  Note that you may still 
 		edit/change the copied contents as you deem fit for your solutions to Challenges C7 to C9. 
 	*/
-struct data
-{
-	StrDate date;
-	int cases;
-	int deaths;
-};
-typedef struct data day;
+	
+	struct data
+	{
+		StrDate date;
+		int cases;
+		int deaths;
+	};
+	typedef struct data day;
 
-struct national
-{
-	string name;
-	long int population;
-	float lifeExpectancy;
-	day daily[MAX];
-	int count;
-};	
-typedef struct national country;
+	struct national
+	{
+		string name;
+		long int population;
+		float lifeExpectancy;
+		day daily[MAX];
+		int count;
+	};	
+	typedef struct national country;
+	
 	/*
 		You may add other structure data type declarations and optionally their corresponding 
 		typedef declarations (aliases) right after this comment.		
+	
 	*/
+	
+	struct regional
+	{
+		string name;
+		long int population;
+		int totalCases, totalDeaths;
+		float percentCases, percentDeaths;
+	};
+	typedef struct regional continent;
 
-
-struct regional
-{
-	string name;
-	long int population;
-	int totalCases, totalDeaths;
-	float percentCases, percentDeaths;
-};
-typedef struct regional continent;
-
-struct area{
-	string cont, countries;
-};
-typedef struct area sign;
+	struct link{
+		string cont, countries;
+	};
+	typedef struct link countryToContinent;
+	
 	/*
 		TO DO: add the function prototypes for all functions that you defined in order accomplish to Challenges C7 to C9.
+	
 	*/
-int Read_COVID_Data(char *param_country, country *ptrData);
+	// From C7
+	int Read_COVID_Data(char *param_country, country *ptrData);
 
-void swap(country *cArr1, country *cArr2);
-void selectionSort(country cArr[], int nCountry);
-void printToFile(country cArr[], int nCountry, char * file_output_name);
-int Stats_C8(char *param_output_filename, char *param_input_filename);
+	// From C8
+	void swap(country *cArr1, country *cArr2);
+	void selectionSort(country cArr[], int nCountry);
+	void printToFile(country cArr[], int nCountry, char * file_output_name);
+	int Stats_C8(char *param_output_filename, char *param_input_filename);
+
+	// From C9
+	void swapCon(continent *aCon1, continent *aCon2);
+	void sortContinent(continent aConti[], int nContinent);
+	void setupContinent(countryToContinent c[]);
+	int getContinent(char * country, char * continent, countryToContinent list[]);
+	void Read_Continent_Data(char * continent_name, char * country_name, countryToContinent pair[], continent world[], int *nContinents);
+	void printContinents(char * file_output, continent world[], int nContinents);
+	int Stats_C9(char *param_output_filename, char *param_input_filename);
 
 #endif
 
