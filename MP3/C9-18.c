@@ -50,7 +50,6 @@ void sortContinent(continent aConti[], int nContinent)
 	for (i = 0; i < nContinent - 1; i++)
 	{
 		key = i;
-		printf("%d. continent: %s\n", i, aConti[i].name);
 		for (j = i + 1; j < nContinent ; j++)
 			if (strcmp(aConti[key].name,aConti[j].name) > 0)
 				key = j;
@@ -125,7 +124,7 @@ void addDataToContinent(char * continent_name, country nation, continent world[]
 void Read_Continent_Data(char * continent_name, char * country_name, countryToContinent pair[], continent world[], int *nContinents)
 {
 	// Variable Declarations
-	int i,j;
+	int i;
 	country nation;
 	// Store Country Data in nation variable
 	Read_COVID_Data(country_name,&nation);
@@ -180,12 +179,10 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 		{
 			if(getContinent(country_name,continent_name,pair)) //get continent of country
 			{
-				printf("GOT CONTINENT!\n");
 				Read_Continent_Data(continent_name,country_name,pair,world, &i); //get all data from the continent and store to world[] if not already added
 			} 
 					
 		}
-		printf("\n\nNUMBER: %d\n\n", i);
 		sortContinent(world, i); //sort world[]
 		printContinents(param_output_filename, world, i);//print world to file
 		fclose(fp);
