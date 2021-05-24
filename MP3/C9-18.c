@@ -107,7 +107,19 @@ getContinent(char * country, char * continent, countryToContinent list[])
     }    
     return 0; // return 0 - not found    
 }
-
+void addDataToContinent(char * continent_name, country nation, continent world[], int i)
+{
+	int j;
+	strcpy(world[i].name,continent_name); // copy name
+			world[i].population += nation.population; // copy population
+			for(j=0; j < nation.count; j++) // copy daily data
+			{
+				world[i].totalCases += nation.daily[j].cases;
+				world[i].totalDeaths += nation.daily[j].deaths;
+			}
+			world[i].percentCases = (float) world[i].totalCases / world[i].population * 100; // solve percent of Cases accrd. by population
+			world[i].percentDeaths = (float) world[i].totalDeaths / world[i].population * 100; // solve percent of Deaths accrd. by population
+}
 /* Copies continent data to world array */
 void Read_Continent_Data(char * continent_name, char * country_name, countryToContinent pair[], continent world[], int *nContinents)
 {
@@ -118,26 +130,17 @@ void Read_Continent_Data(char * continent_name, char * country_name, countryToCo
 	Read_COVID_Data(country_name,&nation);
 	// Search world array for a matching continent name and add contents from nation,
 	// If no matching continent, make a new continent and add contents from nation
-	for(i=0; i <= *nContinents; i++)
+	for(i=0; i < *nContinents; i++)
 	{
 		// check if any match first, then add if there is none
-		if(strcmp(world[i].name,continent_name) == 0 || i == *nContinents) 
+		if(strcmp(world[i].name,continent_name) == 0) 
 		{
-			strcpy(world[i].name,continent_name); // copy name
-			world[i].population += nation.population; // copy population
-			for(j=0; j < nation.count; j++) // copy daily data
-			{
-				world[i].totalCases += nation.daily[j].cases;
-				world[i].totalDeaths += nation.daily[j].deaths;
-			}
-			world[i].percentCases = (float) world[i].totalCases / world[i].population * 100; // solve percent of Cases accrd. by population
-			world[i].percentDeaths = (float) world[i].totalDeaths / world[i].population * 100; // solve percent of Deaths accrd. by population
+			addDataToContinent(continent_name,nation,world,i);
+			return;
 		}
-		// If a new contnent is added, increase nContinents;
-		if(i == *nContinents)
-			(*nContinents)++;
-
 	}
+	addDataToContinent(continent_name,nation,world,*nContinents);
+	(*nContinents)++;
 }	
 
 
@@ -171,12 +174,17 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 	fp = fopen(param_input_filename, "r"); // read file
 	if(fp != NULL) // make sure file has data
 	{
+		setupContinent(pair);
 		while(fscanf(fp,"%s",country_name) == 1) // get country name
 		{
-			setupContinent(pair);
 			if(getContinent(country_name,continent_name,pair)) //get continent of country
-				Read_Continent_Data(continent_name,country_name,pair,world, &i); //get all data from the continent and store to world[] if not already added	
+			{
+				printf("GOT CONTINENT!\n");
+				Read_Continent_Data(continent_name,country_name,pair,world, &i); //get all data from the continent and store to world[] if not already added
+			} 
+					
 		}
+		printf("\n\nNUMBER: %d\n\n", i);
 		sortContinent(world, i); //sort world[]
 		printContinents(param_output_filename, world, i);//print world to file
 		fclose(fp);
