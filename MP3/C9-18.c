@@ -23,9 +23,8 @@
 /*
     TO DO: change the #include below to your own file/solution. You are not allowed to include other files.
 */
+
 #include "C6-18.h"
-
-
 
 /*
 	Challenge #9 is not trivial.  
@@ -41,20 +40,13 @@
 	Don't forget to encode the function prototypes in C6-NUMBER.h header file.
 */
 
-void swapCon(continent *aCon1, continent *aCon2)
+/* Sorts the continent array alphabetically using selection sort alogithm */
+void sortContinent(continent aConti[], int nContinent)
 {
+	// Variable Declarations
 	continent temp;
-			
-	temp = *aCon1;
-	*aCon1 = *aCon2;
-	*aCon2 = temp;
-}
-
-void 
-sortContinent(continent aConti[], int nContinent)
-{
-	int i, j, key; 
-	
+	int i, j, key;
+	// Selection Sort Alphabetically	
 	for (i = 0; i < nContinent - 1; i++)
 	{
 		key = i;
@@ -63,70 +55,36 @@ sortContinent(continent aConti[], int nContinent)
 			if (strcmp(aConti[key].name,aConti[j].name) > 0)
 				key = j;
 
-		swapCon(&aConti[i], &aConti[key]);
+		// swap elements
+		temp = aConti[i];
+		aConti[i] = aConti[key];
+		aConti[key] = temp;
 	}
 }
 
-
-
-void Read_Continent_Data(char * continent_name, continent world[], int *nContinents, FILE *fp)
-{
-	country region[NUM_COUNTRIES];
-	string tempCountry, tempContinent;
-	int i, j, count=0;
-	FILE *fC;
-	fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
-
-	// for(i=0; i < *nContinents; i++) // check if continent exists
-	// 	if(strcmp(continent_name,world[i].name) == 0)
-	// 	{
-	// 		printf("DUPLICATE\n");
-	// 		return;
-	// 	}
-		
-	for(i=0; i < NUM_COUNTRIES; i++) // store in region[] if same region
-	{
-		fscanf(fC,"%s %s", tempContinent, tempCountry);
-		if(strcmp(tempContinent,continent_name) == 0)
-		{
-			// printf("%s\n",tempCountry);
-			Read_COVID_Data(tempCountry,&region[i]);
-			count++;
-		}		
-	}
-	// printf("COUNT: %d", count);
-	world[*nContinents].totalCases = 0;
-	world[*nContinents].totalDeaths = 0;
-	world[*nContinents].population = 0;
-	strcpy(world[*nContinents].name, continent_name); // name
-	for (i=0; i < count + 1; i++)
-	{
-		
-		world[*nContinents].population += region[i].population; // population
-		for(j=0; j < region[i].count; j++)
-		{
-			//printf("%s\t%d :: %d\n",region[i].name,j, world[*nContinents].totalCases);
-			world[*nContinents].totalCases += region[i].daily[j].cases; // cases
-			world[*nContinents].totalDeaths += region[i].daily[j].deaths; //deaths
-		}
-		world[*nContinents].percentCases = (float) world[*nContinents].totalCases / world[*nContinents].population * 100; // percentCases
-		world[*nContinents].percentDeaths = (float) world[*nContinents].totalDeaths / world[*nContinents].population * 100; // percentDeaths
-	}
-	(*nContinents)++; 
-}	
-	
-void setupContinent(sign c[]){
-    FILE *fC;
-    int i = 0;
+/* Access the CONTINENT-COUNTRY file and converts it in a pair based array */	
+void setupContinent(countryToContinent c[]){
+    // Variable Definitions
+	FILE *fC; // file pointer fC for file Continent
+    int i = 0; 
     fC = fopen("CHD/CONTINENT-COUNTRY.txt","r");
-    while(fscanf(fC,"%s %s", c[i].cont, c[i].countries) == 2){
-        i++;
-    }
-    fclose(fC);
-}
+	if(fC != NULL) // check if file exists
+	{
+		// if 2 variables were scanned, move onto the next element
+    	while(fscanf(fC,"%s %s", c[i].cont, c[i].countries) == 2)
+        	i++;
+    	fclose(fC);
+		return; 
+	}
+	// print to stderr if file cannot be found
+	fprintf(stderr, "Cannot find CONTINENT-COUNTRY.txt");
 
+}
+	
+
+/* Searches for the continent of the country provided using binary search algorithm*/
 int
-getContinent(char * country, char * continent, sign list[])
+getContinent(char * country, char * continent, countryToContinent list[])
 {
     int low = 0, high = NUM_COUNTRIES - 1, mid;
     int found = 0;
@@ -135,26 +93,62 @@ getContinent(char * country, char * continent, sign list[])
     {
         mid = (low + high) /2;
         if(strcmp(country, list[mid].countries) == 0)
-                found = 1;
+                found = 1; // found a matching country in the array
         else if(strcmp(country, list[mid].countries) < 0)
-            high = mid -1;
+            high = mid -1; // country is before the parameter alphabetically
         else
-            low = mid + 1;
+            low = mid + 1; // country is after the parameter alphabetically
     }
     
     if (found)
     {
-        strcpy(continent,list[mid].cont);
-        return 1;
+        strcpy(continent,list[mid].cont); // copy continent name
+        return 1; // return 1 - found
     }    
-    return 0;     
+    return 0; // return 0 - not found    
 }
 
+/* Copies continent data to world array */
+void Read_Continent_Data(char * continent_name, char * country_name, countryToContinent pair[], continent world[], int *nContinents)
+{
+	// Variable Declarations
+	int i,j;
+	country nation;
+	// Store Country Data in nation variable
+	Read_COVID_Data(country_name,&nation);
+	// Search world array for a matching continent name and add contents from nation,
+	// If no matching continent, make a new continent and add contents from nation
+	for(i=0; i <= *nContinents; i++)
+	{
+		// check if any match first, then add if there is none
+		if(strcmp(world[i].name,continent_name) == 0 || i == *nContinents) 
+		{
+			strcpy(world[i].name,continent_name); // copy name
+			world[i].population += nation.population; // copy population
+			for(j=0; j < nation.count; j++) // copy daily data
+			{
+				world[i].totalCases += nation.daily[j].cases;
+				world[i].totalDeaths += nation.daily[j].deaths;
+			}
+			world[i].percentCases = (float) world[i].totalCases / world[i].population * 100; // solve percent of Cases accrd. by population
+			world[i].percentDeaths = (float) world[i].totalDeaths / world[i].population * 100; // solve percent of Deaths accrd. by population
+		}
+		// If a new contnent is added, increase nContinents;
+		if(i == *nContinents)
+			(*nContinents)++;
+
+	}
+}	
+
+
+/* Prints the sorted array to the file_coutput specified */
 void printContinents(char * file_output, continent world[], int nContinents)
 {
-	FILE *fpw;
+	// Variable Declarations
+	FILE *fpw; // file pointer fpW for file to Write
 	int i;
 	fpw = fopen(file_output, "w");
+	// write data per element of world[]
 	for(i = 0; i < nContinents; i++)
 		fprintf(fpw,"%-20s%10ld\t\t%10d\t%10.6f\t\t%10d\t%10.6f\n", world[i].name, world[i].population, world[i].totalCases, world[i].percentCases, world[i].totalDeaths, world[i].percentDeaths);
 	fclose(fpw);
@@ -162,16 +156,16 @@ void printContinents(char * file_output, continent world[], int nContinents)
 /*
 	TO DO: Implement Stats_C9().  Call the helper functions that you defined above.
         
-	  	   Replace this comment with a brief description of what the function will do.
+	  	   Compute the Statistics of countries sorted by continent.
 */
 int 
 Stats_C9(char *param_output_filename, char *param_input_filename)
 {
 	/* Declare your own local variables. */
-	FILE *fp;
+	FILE *fp; // file fp for the input_filename
 	int i=0;
 	string country_name, continent_name;
-	sign pair[NUM_COUNTRIES];
+	countryToContinent pair[NUM_COUNTRIES];
 	continent world[NUM_CONTINENTS];
 	/* Document your solution with sensible inline comments. */
 	fp = fopen(param_input_filename, "r"); // read file
@@ -181,14 +175,10 @@ Stats_C9(char *param_output_filename, char *param_input_filename)
 		{
 			setupContinent(pair);
 			if(getContinent(country_name,continent_name,pair)) //get continent of country
-				Read_Continent_Data(continent_name,world, &i, fp); //get all data from the continent and store to world[] if not already added	
+				Read_Continent_Data(continent_name,country_name,pair,world, &i); //get all data from the continent and store to world[] if not already added	
 		}
-			
 		sortContinent(world, i); //sort world[]
-		printf("\nbefore: %d\n", i);
-		
 		printContinents(param_output_filename, world, i);//print world to file
-		printf("\nafter\n");
 		fclose(fp);
 		return 1;
 	} 
