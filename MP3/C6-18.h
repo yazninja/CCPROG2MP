@@ -118,6 +118,7 @@
 	void sortContinent(continent aConti[], int nContinent);
 	void setupContinent(countryToContinent c[]);
 	int getContinent(char * country, char * continent, countryToContinent list[]);
+  void addDataToContinent(char * continent_name, country nation, continent world[], int i);
 	void Read_Continent_Data(char * continent_name, char * country_name, countryToContinent pair[], continent world[], int *nContinents);
 	void printContinents(char * file_output, continent world[], int nContinents);
 	int Stats_C9(char *param_output_filename, char *param_input_filename);

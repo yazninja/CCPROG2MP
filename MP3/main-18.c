@@ -1,9 +1,9 @@
 /*
-    LASTNAME1, FIRSTNAME1:  					  	SECTION1:      
+    LASTNAME1, FIRSTNAME1: Grasparil, David Nikolai 	SECTION1: S15    
     
-	LASTNAME2, FIRSTNAME2:     						SECTION2:    
+	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean      		SECTION2: S15    
 
-	DATE SUBMITTED      :
+	DATE SUBMITTED      : May 24,2021
 	
 	Do not forget to ENCODE your name/s, section/s and date on the space indicated above.
 		

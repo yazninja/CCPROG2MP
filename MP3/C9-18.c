@@ -3,7 +3,7 @@
     
 	LASTNAME2, FIRSTNAME2: Ligot, Yazle Sean      		SECTION2: S15    
 
-	DATE SUBMITTED      : May 20,2021
+	DATE SUBMITTED      : May 24,2021
 	
 	Do not forget to ENCODE your name/s, section/s and date on the space indicated above.
 		
@@ -82,7 +82,7 @@ void setupContinent(countryToContinent c[]){
 }
 	
 
-/* Searches for the continent of the country provided using binary search algorithm*/
+/* Searches for the continent of the country provided using binary search algorithm */
 int
 getContinent(char * country, char * continent, countryToContinent list[])
 {
@@ -107,18 +107,19 @@ getContinent(char * country, char * continent, countryToContinent list[])
     }    
     return 0; // return 0 - not found    
 }
+/* Copies and add data to world[] */
 void addDataToContinent(char * continent_name, country nation, continent world[], int i)
 {
 	int j;
 	strcpy(world[i].name,continent_name); // copy name
-			world[i].population += nation.population; // copy population
-			for(j=0; j < nation.count; j++) // copy daily data
-			{
-				world[i].totalCases += nation.daily[j].cases;
-				world[i].totalDeaths += nation.daily[j].deaths;
-			}
-			world[i].percentCases = (float) world[i].totalCases / world[i].population * 100; // solve percent of Cases accrd. by population
-			world[i].percentDeaths = (float) world[i].totalDeaths / world[i].population * 100; // solve percent of Deaths accrd. by population
+	world[i].population += nation.population; // copy population
+	for(j=0; j < nation.count; j++) // copy daily data
+	{
+		world[i].totalCases += nation.daily[j].cases;
+		world[i].totalDeaths += nation.daily[j].deaths;
+	}
+	world[i].percentCases = (float) world[i].totalCases / world[i].population * 100; // solve percent of Cases accrd. by population
+	world[i].percentDeaths = (float) world[i].totalDeaths / world[i].population * 100; // solve percent of Deaths accrd. by population
 }
 /* Copies continent data to world array */
 void Read_Continent_Data(char * continent_name, char * country_name, countryToContinent pair[], continent world[], int *nContinents)
