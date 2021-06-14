@@ -74,10 +74,11 @@
 ## About The Project
 
 This project was made as a culmination of lessons we have learnt while studying the C language. Each Part of this Machine Project was tested and runned by themselves according to each of their specs. Learn more below.
-
-* [Part 1](https://github.com/yazninja/CCPROG2MP/MP1)
-* [Part 2](https://github.com/yazninja/CCPROG2MP/MP2)
-* [Part 3](https://github.com/yazninja/CCPROG2MP/MP3)
+<ul>
+<li><a href="https://github.com/yazninja/CCPROG2MP/MP1">Part 1</a></li>
+<li><a href="https://github.com/yazninja/CCPROG2MP/MP2">Part 2</a></li>
+<li><a href="https://github.com/yazninja/CCPROG2MP/MP3">Part 3</a></li>
+</ul>
 
 * Extras
   * [GE03](https://github.com/yazninja/CCPROG2MP/GE03)
